@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b3d24">
+<link rel="canonical" href="https://govt-national-college-morning.github.io/">
+<meta property="og:url" content="https://govt-national-college-morning.github.io/">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<title>GNCK Admission 2026-27 | Govt. National College (Morning), Karachi</title>
+<meta name="description" content="GNCK Admission 2026-27: Govt. National College (Morning), Karachi. Class XI online admission form, status and slip, slip verification, Board enrollment card, SECCAP documents and cut-off. Admission is completely free.">
+<meta property="og:title" content="GNCK Admission 2026-27 | Govt. National College (Morning), Karachi">
+<meta property="og:description" content="Online admission form, status, slip verification, documents, cut-off and contact.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollegeOrUniversity","name":"Govt. National College (Morning), Karachi","alternateName":"GNCK","email":"govtnationalno1college@gmail.com","telephone":"+92-333-2448443","address":{"@type":"PostalAddress","addressLocality":"Karachi","addressRegion":"Sindh","addressCountry":"PK"}}</script>
+<style>
+/* Layout: college green letterhead with gold rule (same identity as the slips and
+   the online form), live admission status beside the headline, sticky section nav,
+   then one reading column of task blocks; tabs for the two document sets. */
+:root {
+  --green: #0b3d24;
+  --green-2: #135c38;
+  --gold: #c9a227;
+  --gold-soft: #f3dc8f;
+  --paper: #f4f6f4;
+  --card: #ffffff;
+  --fg: #142019;
+  --muted: #56645b;
+  --line: #d8e0da;
+  --chip: #e6f0ea;
+  --accent: #0f7a4f;
+  --warn-bg: #fff6dc;
+  --warn-fg: #6b4e00;
+  --f-display: "Lora", Georgia, "Times New Roman", serif;
+  --f-body: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+  --f-urdu: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Urdu Typesetting", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --green: #0c2e1d; --green-2: #12452b; --gold: #d9b443; --gold-soft: #f3dc8f;
+    --paper: #0b1310; --card: #121d17; --fg: #e5ede8; --muted: #a0b0a6; --line: #23352a;
+    --chip: #16301f; --accent: #45c487; --warn-bg: #2a2413; --warn-fg: #f0d58a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --green: #0c2e1d; --green-2: #12452b; --gold: #d9b443; --gold-soft: #f3dc8f;
+  --paper: #0b1310; --card: #121d17; --fg: #e5ede8; --muted: #a0b0a6; --line: #23352a;
+  --chip: #16301f; --accent: #45c487; --warn-bg: #2a2413; --warn-fg: #f0d58a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { margin: 0; background: var(--paper); color: var(--fg); font-family: var(--f-body); font-size: 17px; line-height: 1.6; }
+html[lang="ur"] body { font-family: var(--f-urdu); font-size: 16px; line-height: 2.15; }
+html[lang="ur"] .en, html:not([lang="ur"]) .ur { display: none !important; }
+.wrap { max-width: 1060px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.2; }
+html[lang="ur"] h1, html[lang="ur"] h2, html[lang="ur"] h3 { font-family: var(--f-urdu); line-height: 1.9; font-weight: 600; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+.num { direction: ltr; unicode-bidi: isolate; font-family: var(--f-body); }
+
+/* ---------- Top bar ---------- */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 20; background: var(--green); }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 15; background: var(--green); color: #fff; border-bottom: 3px solid var(--gold); }
+.top .wrap { display: flex; align-items: center; gap: 12px; padding-block: 8px; }
+.brandmini { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; min-width: 0; }
+.brandmini img { width: 38px; height: 38px; border-radius: 50%; background: #fff; padding: 2px; flex: none; }
+.brandmini b { font-family: var(--f-display); font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html[lang="ur"] .brandmini b { font-family: var(--f-urdu); font-size: .95rem; }
+.navlinks { display: flex; gap: 2px; margin-inline-start: auto; overflow-x: auto; scrollbar-width: none; }
+.navlinks::-webkit-scrollbar { display: none; }
+.navlinks a { color: #dbe9e0; text-decoration: none; font-size: .92rem; font-weight: 600; padding: 6px 10px; border-radius: 6px; white-space: nowrap; }
+.navlinks a:hover, .navlinks a.on { background: rgba(255,255,255,.12); color: #fff; }
+.langbtn { flex: none; font: inherit; font-weight: 700; font-size: .9rem; background: var(--gold); color: #1d1600; border: 0; border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+html:not([lang="ur"]) .langbtn { font-family: var(--f-urdu); }
+@media (max-width: 860px) { .navlinks { display: none; } .langbtn { margin-inline-start: auto; } }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; background: linear-gradient(160deg, var(--green) 0%, var(--green-2) 100%); color: #fff; }
+.hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+.hero::before { inset-inline-end: -140px; top: -160px; width: 560px; height: 560px; background: repeating-radial-gradient(circle, transparent 0 10px, rgba(243,220,143,.10) 10px 11px); }
+.hero::after { inset-inline-start: -180px; bottom: -260px; width: 460px; height: 460px; background: repeating-radial-gradient(circle, transparent 0 8px, rgba(255,255,255,.06) 8px 9px); }
+.hero .wrap { position: relative; z-index: 1; padding-block: 34px 40px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 30px; align-items: center; }
+@media (max-width: 820px) { .hero .wrap { grid-template-columns: 1fr; padding-block: 24px 30px; } }
+.crest { display: flex; gap: 14px; align-items: center; }
+.crest img { width: 78px; height: 78px; border-radius: 50%; background: #fff; border: 3px solid var(--gold); padding: 3px; flex: none; }
+.crest .city { letter-spacing: .3em; font-size: .74rem; font-weight: 700; color: var(--gold-soft); font-family: var(--f-body); }
+.crest .nm { font-family: var(--f-display); font-size: clamp(1.25rem, 3.2vw, 1.7rem); font-weight: 700; line-height: 1.2; }
+html[lang="ur"] .crest .nm { font-family: var(--f-urdu); }
+.hero h1 { margin-top: 22px; font-size: clamp(2.1rem, 6vw, 3.3rem); }
+.hero h1 em { font-style: normal; color: var(--gold-soft); }
+.hero .lede { margin: 12px 0 0; color: #dcebe2; max-width: 50ch; font-size: 1.06rem; }
+.cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font-weight: 700; border-radius: 10px; padding: 12px 20px; font-size: 1rem; border: 0; cursor: pointer; font-family: inherit; transition: transform .15s, background .15s; }
+.btn.pri { background: var(--gold); color: #1d1600; }
+.btn.pri:hover { transform: translateY(-1px); }
+.btn.ghost { color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.5); }
+.btn.ghost:hover { background: rgba(255,255,255,.08); }
+.btn.out { color: var(--fg); box-shadow: inset 0 0 0 1.5px var(--line); background: transparent; }
+.btn.out:hover { box-shadow: inset 0 0 0 1.5px var(--accent); }
+.btn.solid { background: var(--green); color: #fff; }
+
+.status { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); border-radius: 16px; padding: 18px; }
+.status .k { display: flex; align-items: center; gap: 8px; font-size: .78rem; letter-spacing: .12em; font-weight: 700; color: var(--gold-soft); text-transform: uppercase; font-family: var(--f-body); }
+html[lang="ur"] .status .k { letter-spacing: 0; font-family: var(--f-urdu); font-size: .85rem; text-transform: none; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #f5c542; box-shadow: 0 0 0 4px rgba(245,197,66,.22); flex: none; }
+.dot.live { background: #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,.22); }
+.dot.off { background: #f87171; box-shadow: 0 0 0 4px rgba(248,113,113,.22); }
+.status .big { margin-top: 8px; font-family: var(--f-display); font-size: 1.4rem; font-weight: 700; line-height: 1.25; }
+html[lang="ur"] .status .big { font-family: var(--f-urdu); line-height: 1.9; }
+.count { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+.count div { background: rgba(0,0,0,.2); border-radius: 10px; padding: 8px 4px; text-align: center; }
+.count b { display: block; font-family: var(--f-body); font-size: 1.7rem; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.count span { font-size: .78rem; color: #cfe2d6; }
+.dates { margin-top: 14px; display: grid; gap: 6px; font-size: .95rem; color: #dcebe2; }
+.dates div { display: flex; justify-content: space-between; gap: 10px; border-top: 1px dashed rgba(255,255,255,.2); padding-top: 6px; }
+.dates b { color: #fff; }
+
+/* ---------- Sections ---------- */
+main { padding-bottom: 20px; }
+section { margin-top: 48px; }
+.sh { margin-bottom: 18px; }
+.sh .eyebrow { display: block; font-size: .78rem; letter-spacing: .14em; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 2px; font-family: var(--f-body); }
+html[lang="ur"] .sh .eyebrow { letter-spacing: 0; text-transform: none; font-family: var(--f-urdu); font-size: .85rem; }
+.sh h2 { font-size: clamp(1.45rem, 3.4vw, 1.9rem); }
+.sh p { margin: 6px 0 0; color: var(--muted); max-width: 70ch; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+
+.free { margin-top: 22px; display: flex; gap: 14px; align-items: center; background: var(--warn-bg); color: var(--warn-fg); border-radius: 12px; padding: 14px 16px; }
+.free .stamp { flex: none; font-family: var(--f-display); font-weight: 700; color: var(--accent); border: 2px solid var(--accent); border-radius: 8px; padding: 3px 10px; transform: rotate(-4deg); background: var(--card); }
+.free p { margin: 0; min-width: 0; }
+.free .mail { display: inline-block; }
+@media (max-width: 600px) { .free { flex-direction: column; align-items: flex-start; } .free .mail { display: block; margin-top: 4px; word-break: break-all; } }
+.mail { font-weight: 700; direction: ltr; unicode-bidi: isolate; font-family: var(--f-body); }
+
+/* services */
+.svc { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 980px) { .svc { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .svc { grid-template-columns: 1fr; } }
+.tile { display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: var(--fg); padding: 18px; min-width: 0; transition: border-color .15s, transform .15s; }
+.tile:hover { border-color: var(--accent); transform: translateY(-2px); }
+.tile .ic { width: 42px; height: 42px; border-radius: 10px; background: var(--chip); color: var(--accent); display: grid; place-items: center; }
+.tile .ic svg { width: 22px; height: 22px; }
+.tile .t { font-weight: 700; font-size: 1.05rem; line-height: 1.35; }
+.tile .d { color: var(--muted); font-size: .92rem; }
+.tile .go { margin-top: auto; padding-top: 4px; font-weight: 700; color: var(--accent); font-size: .92rem; }
+.tile.main { background: var(--green); border-color: var(--green); color: #fff; }
+.tile.main .ic { background: rgba(255,255,255,.12); color: var(--gold-soft); }
+.tile.main .d, .tile.main .go { color: #d7ebdf; }
+
+/* process */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; counter-reset: s; }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+.steps li { counter-increment: s; padding: 16px; position: relative; min-width: 0; }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--green); color: var(--gold-soft); font-weight: 700; font-family: var(--f-body); margin-bottom: 8px; }
+.steps b { display: block; font-size: 1.02rem; }
+.steps span { color: var(--muted); font-size: .93rem; display: block; }
+.note { margin-top: 12px; padding: 12px 14px; border-radius: 10px; background: var(--chip); font-size: .95rem; }
+
+/* documents */
+.tabsbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tabsbar .grp { font-size: .78rem; font-weight: 700; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; margin-inline-end: 4px; font-family: var(--f-body); }
+html[lang="ur"] .tabsbar .grp { letter-spacing: 0; text-transform: none; font-family: var(--f-urdu); }
+.tabsbar button { font: inherit; font-size: .92rem; font-weight: 700; border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.tabsbar button[aria-selected="true"] { background: var(--green); border-color: var(--green); color: #fff; }
+.tabsbar + .tabsbar { margin-top: 8px; }
+.docbox { margin-top: 14px; padding: 16px; }
+.dochead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+.dochead h3 { font-size: 1.1rem; }
+.prog { display: flex; align-items: center; gap: 10px; min-width: 200px; flex: 1 1 220px; max-width: 360px; }
+.bar { flex: 1; height: 8px; border-radius: 999px; background: var(--chip); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 999px; transition: width .25s; }
+.prog span { font-size: .88rem; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; font-family: var(--f-body); }
+.checks { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 640px) { .checks { grid-template-columns: 1fr; } }
+.checks label { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; cursor: pointer; min-width: 0; }
+.checks input { width: 18px; height: 18px; margin-top: 4px; accent-color: var(--accent); flex: none; }
+.checks small { display: block; color: var(--muted); font-size: .86rem; }
+.checks label:has(input:checked) { border-color: var(--accent); background: var(--chip); }
+.photo { margin-top: 14px; display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 14px; align-items: center; border-top: 1px dashed var(--line); padding-top: 14px; }
+.ph { width: 66px; height: 85px; margin: 0 auto; border: 2px solid var(--fg); border-radius: 4px; background: #2f6fd1; position: relative; overflow: hidden; }
+.ph::before { content: ""; position: absolute; left: 50%; top: 16px; width: 28px; height: 32px; border-radius: 50%; transform: translateX(-50%); background: #f1d3b3; }
+.ph::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 54px; height: 24px; border-radius: 30px 30px 0 0; transform: translateX(-50%); background: #fff; }
+.mm { text-align: center; font-size: .75rem; color: var(--muted); margin-top: 4px; font-family: var(--f-body); }
+.photo ul { margin: 0; padding-inline-start: 1.1em; display: grid; gap: 2px; font-size: .93rem; }
+
+/* faculties */
+.fac { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.fc { padding: 16px; min-width: 0; }
+.fc .code { font-size: .75rem; font-weight: 700; letter-spacing: .1em; color: var(--accent); font-family: var(--f-body); }
+.fc h3 { font-size: 1.12rem; margin: 2px 0 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { background: var(--chip); border-radius: 999px; padding: 2px 10px; font-size: .86rem; }
+.chip.req { background: var(--green); color: #fff; }
+.fc .lbl { font-size: .8rem; color: var(--muted); font-weight: 700; margin: 8px 0 4px; }
+.fc.wide { grid-column: 1 / -1; }
+
+/* cut-off */
+.cut { padding: 6px 16px; }
+.cr { display: grid; grid-template-columns: minmax(0, 170px) minmax(0, 1fr) 54px; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.cr:last-child { border-bottom: 0; }
+.cr .bar { height: 12px; }
+.cr .bar i { background: var(--gold); }
+.cr b { text-align: end; font-size: 1.15rem; font-variant-numeric: tabular-nums; font-family: var(--f-body); }
+@media (max-width: 520px) { .cr { grid-template-columns: minmax(0, 1fr) 50px; } .cr .bar { grid-column: 1 / -1; grid-row: 2; } }
+
+/* two-col info */
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 820px) { .two { grid-template-columns: 1fr; } }
+.info { padding: 18px; min-width: 0; }
+.info h3 { font-size: 1.15rem; margin-bottom: 6px; }
+.info ol, .info ul { margin: 8px 0 0; padding-inline-start: 1.3em; display: grid; gap: 4px; }
+.info .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.tag { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .06em; background: var(--chip); color: var(--accent); border-radius: 6px; padding: 2px 8px; font-family: var(--f-body); }
+html[lang="ur"] .tag { font-family: var(--f-urdu); letter-spacing: 0; }
+
+/* FAQ */
+.faqs input { width: 100%; font: inherit; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--fg); margin-bottom: 10px; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 0 16px; }
+details + details { margin-top: 8px; }
+summary { cursor: pointer; padding: 13px 0; font-weight: 700; }
+details p { margin: 0 0 14px; color: var(--muted); }
+
+/* contact */
+.contact { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 900px) { .contact { grid-template-columns: 1fr; } }
+.ci { padding: 16px; min-width: 0; }
+.ci .k { font-size: .78rem; font-weight: 700; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; font-family: var(--f-body); }
+html[lang="ur"] .ci .k { letter-spacing: 0; text-transform: none; font-family: var(--f-urdu); }
+.person { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.person:last-child { border-bottom: 0; }
+.person b { display: block; }
+.phone { display: block; font-family: var(--f-body); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+.copy { font: inherit; font-size: .82rem; font-weight: 700; border: 1px solid var(--line); background: transparent; color: var(--accent); border-radius: 8px; padding: 3px 10px; cursor: pointer; flex: none; }
+
+footer { margin-top: 56px; background: var(--green); color: #cfe2d6; border-top: 4px solid var(--gold); }
+footer .wrap { padding-block: 22px 30px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: .9rem; }
+footer b { color: #fff; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .tile, .bar i { transition: none; } .tile:hover, .btn.pri:hover { transform: none; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brandmini" href="#home"><img src="data:image/png;base64,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" alt=""><b><span class="en">Govt. National College (Morning)</span><span class="ur">گورنمنٹ نیشنل کالج (مارننگ)</span></b></a>
+    <nav class="navlinks" aria-label="Sections">
+      <a href="#services"><span class="en">Online</span><span class="ur">آن لائن</span></a>
+      <a href="#process"><span class="en">Admission</span><span class="ur">داخلہ</span></a>
+      <a href="#documents"><span class="en">Documents</span><span class="ur">دستاویزات</span></a>
+      <a href="#faculties"><span class="en">Faculties</span><span class="ur">فیکلٹیز</span></a>
+      <a href="#cutoff"><span class="en">Cut-off</span><span class="ur">کٹ آف</span></a>
+      <a href="#enrollment"><span class="en">Enrollment</span><span class="ur">اینرولمنٹ</span></a>
+      <a href="#faq"><span class="en">FAQ</span><span class="ur">سوالات</span></a>
+      <a href="#contact"><span class="en">Contact</span><span class="ur">رابطہ</span></a>
+    </nav>
+    <button class="langbtn" id="langbtn" type="button"><span class="en">اردو</span><span class="ur">English</span></button>
+  </div>
+</header>
+
+<div class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <div class="crest">
+        <img src="data:image/png;base64,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" alt="Govt. National College (Morning) logo">
+        <div><div class="city">KARACHI</div><div class="nm"><span class="en">Govt. National College (Morning)</span><span class="ur">گورنمنٹ نیشنل کالج (مارننگ)، کراچی</span></div></div>
+      </div>
+      <h1><span class="en">XI Admission <em>2026–27</em></span><span class="ur">داخلہ جماعت گیارہویں <em class="num">2026–27</em></span></h1>
+      <p class="lede"><span class="en">Apply online for First Year (Class XI). Fill the form, track your status and verify your admission slip, all in one place.</span><span class="ur">فرسٹ ایئر (جماعت گیارہویں) کے لیے آن لائن درخواست دیں۔ فارم بھریں، اپنے فارم کی صورتحال دیکھیں اور داخلہ سلپ کی تصدیق کریں، سب ایک جگہ۔</span></p>
+      <div class="cta">
+        <a class="btn pri" href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=apply" target="_blank" rel="noopener"><span class="en">Apply Online</span><span class="ur">آن لائن فارم بھریں</span></a>
+        <a class="btn ghost" href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec" target="_blank" rel="noopener"><span class="en">Check Status &amp; Slip</span><span class="ur">صورتحال اور سلپ دیکھیں</span></a>
+      </div>
+    </div>
+    <aside class="status" aria-live="polite">
+      <div class="k"><span class="dot" id="sdot"></span><span class="en">Online Admission Form</span><span class="ur">آن لائن داخلہ فارم</span></div>
+      <div class="big" id="sbig"></div>
+      <div class="count" id="scount">
+        <div><b id="cd">0</b><span><span class="en">Days</span><span class="ur">دن</span></span></div>
+        <div><b id="ch">0</b><span><span class="en">Hours</span><span class="ur">گھنٹے</span></span></div>
+        <div><b id="cm">0</b><span><span class="en">Minutes</span><span class="ur">منٹ</span></span></div>
+      </div>
+      <div class="dates">
+        <div><span class="en">Form opens</span><span class="ur">فارم شروع</span><b class="num">1 Nov 2026</b></div>
+        <div><span class="en">Form closes</span><span class="ur">فارم بند</span><b class="num">31 Dec 2026</b></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="free">
+    <span class="stamp">FREE</span>
+    <p><span class="en"><b>Admission and enrollment are completely free.</b> No cash is accepted at the counter. Any Board late fee is paid by bank challan only. If anyone asks for money, complain at </span><span class="ur"><b>داخلہ اور اینرولمنٹ بالکل مفت ہے۔</b> کاؤنٹر پر کوئی نقد رقم نہیں لی جاتی۔ بورڈ کی لیٹ فیس صرف بینک چالان سے ادا ہوتی ہے۔ اگر کوئی پیسے مانگے تو اس ای میل پر شکایت کریں: </span><span class="mail">govtnationalno1college@gmail.com</span></p>
+  </div>
+
+  <section id="services" aria-labelledby="h-svc">
+    <div class="sh"><span class="eyebrow"><span class="en">Online services</span><span class="ur">آن لائن سہولیات</span></span><h2 id="h-svc"><span class="en">What you can do from home</span><span class="ur">گھر بیٹھے کیا کر سکتے ہیں</span></h2></div>
+    <div class="svc">
+      <a class="card tile main" href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=apply" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 14h6M9 18h4"/></svg></span>
+        <span class="t"><span class="en">Online Admission Form</span><span class="ur">آن لائن داخلہ فارم</span></span>
+        <span class="d"><span class="en">For students confirmed through SECCAP. Keep your College Roll No. and Matric Roll No. ready.</span><span class="ur">صرف وہ طلبہ جن کا داخلہ سیکیپ سے کنفرم ہو چکا ہے۔ کالج رول نمبر اور میٹرک رول نمبر ساتھ رکھیں۔</span></span>
+        <span class="go"><span class="en">Open form →</span><span class="ur">فارم کھولیں ←</span></span>
+      </a>
+      <a class="card tile" href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+        <span class="t"><span class="en">Status &amp; Slip</span><span class="ur">صورتحال اور سلپ</span></span>
+        <span class="d"><span class="en">See your form status or objection, and download your admission slip.</span><span class="ur">اپنے فارم کی صورتحال یا اعتراض دیکھیں اور داخلہ سلپ ڈاؤن لوڈ کریں۔</span></span>
+        <span class="go"><span class="en">Check now →</span><span class="ur">ابھی دیکھیں ←</span></span>
+      </a>
+      <a class="card tile" href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=code" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <span class="t"><span class="en">Verify a Slip</span><span class="ur">سلپ کی تصدیق</span></span>
+        <span class="d"><span class="en">If the QR does not scan, enter the Verification Code printed on the slip.</span><span class="ur">اگر کیو آر اسکین نہ ہو تو سلپ پر چھپا ویریفکیشن کوڈ لکھیں۔</span></span>
+        <span class="go"><span class="en">Verify →</span><span class="ur">تصدیق کریں ←</span></span>
+      </a>
+      <a class="card tile" href="#enrollment">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6.5 16c.6-1.4 1.6-2 2.5-2s1.9.6 2.5 2M14 10h4M14 13h3"/></svg></span>
+        <span class="t"><span class="en">Board Enrollment Card</span><span class="ur">بورڈ اینرولمنٹ کارڈ</span></span>
+        <span class="d"><span class="en">Second Year (XII) students: download your Board enrollment card.</span><span class="ur">سال دوم (جماعت بارہویں) کے طلبہ اپنا بورڈ اینرولمنٹ کارڈ ڈاؤن لوڈ کریں۔</span></span>
+        <span class="go"><span class="en">How to download ↓</span><span class="ur">ڈاؤن لوڈ کا طریقہ ↓</span></span>
+      </a>
+      <a class="card tile" href="https://whatsapp.com/channel/0029VbDTnoP7j6g4Ll3sgT3F" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12z"/><path d="M9 10.5c.5 1.6 1.9 3 3.5 3.5l1.2-1.1 2 .9c-.3 1.2-1.3 1.9-2.6 1.7A6.4 6.4 0 0 1 8 10.4C7.8 9.1 8.5 8.1 9.7 7.8l.9 2z"/></svg></span>
+        <span class="t"><span class="en">WhatsApp Channel</span><span class="ur">واٹس ایپ چینل</span></span>
+        <span class="d"><span class="en">Follow the college channel for official updates.</span><span class="ur">سرکاری اطلاعات کے لیے کالج کا چینل فالو کریں۔</span></span>
+        <span class="go"><span class="en">Follow →</span><span class="ur">فالو کریں ←</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section id="process" aria-labelledby="h-proc">
+    <div class="sh"><span class="eyebrow"><span class="en">Admission process</span><span class="ur">داخلے کا طریقہ</span></span><h2 id="h-proc"><span class="en">Four steps to your XI admission</span><span class="ur">گیارہویں جماعت میں داخلے کے چار مراحل</span></h2></div>
+    <ol class="steps">
+      <li class="card"><b><span class="en">SECCAP admission</span><span class="ur">سیکیپ داخلہ</span></b><span><span class="en">Get provisional admission through SECCAP. Your name must be on the college's SECCAP confirmed list.</span><span class="ur">سیکیپ کے ذریعے عارضی داخلہ لیں۔ آپ کا نام کالج کی سیکیپ کنفرم فہرست میں ہونا چاہیے۔</span></span></li>
+      <li class="card"><b><span class="en">Online form</span><span class="ur">آن لائن فارم</span></b><span><span class="en">Fill the online form with your College Roll No. and Matric Roll No. and upload your documents.</span><span class="ur">کالج رول نمبر اور میٹرک رول نمبر سے آن لائن فارم بھریں اور دستاویزات اپ لوڈ کریں۔</span></span></li>
+      <li class="card"><b><span class="en">Visit the college</span><span class="ur">کالج تشریف لائیں</span></b><span><span class="en">Bring your original documents with photocopies. The staff will check them against your form.</span><span class="ur">اصل دستاویزات اور ان کی فوٹو کاپیاں ساتھ لائیں۔ عملہ انہیں آپ کے فارم سے ملائے گا۔</span></span></li>
+      <li class="card"><b><span class="en">Final admission</span><span class="ur">حتمی داخلہ</span></b><span><span class="en">After verification you receive your admission slip with a QR code.</span><span class="ur">تصدیق کے بعد آپ کو کیو آر کوڈ والی داخلہ سلپ ملے گی۔</span></span></li>
+    </ol>
+    <div class="note"><span class="en"><b>Classes:</b> classes start once your admission is confirmed through SECCAP.</span><span class="ur"><b>کلاسز:</b> سیکیپ سے داخلہ کنفرم ہونے کے بعد کلاسز شروع ہو جاتی ہیں۔</span></div>
+  </section>
+
+  <section id="documents" aria-labelledby="h-docs">
+    <div class="sh"><span class="eyebrow"><span class="en">Be ready</span><span class="ur">تیاری</span></span><h2 id="h-docs"><span class="en">Required documents</span><span class="ur">ضروری دستاویزات</span></h2><p><span class="en">Tick each document as you arrange it. Your ticks stay on this phone only.</span><span class="ur">ہر دستاویز تیار ہونے پر نشان لگائیں۔ یہ نشان صرف اسی فون پر محفوظ رہتے ہیں۔</span></p></div>
+    <div class="tabsbar" role="tablist" aria-label="SECCAP">
+      <span class="grp"><span class="en">SECCAP</span><span class="ur">سیکیپ</span></span>
+      <button type="button" role="tab" data-d="sm" aria-selected="true"><span class="en">Matric</span><span class="ur">میٹرک</span></button>
+      <button type="button" role="tab" data-d="so" aria-selected="false"><span class="en">O-Level</span><span class="ur">او لیول</span></button>
+    </div>
+    <div class="tabsbar" role="tablist" aria-label="Online form">
+      <span class="grp"><span class="en">Online form uploads</span><span class="ur">آن لائن فارم اپ لوڈ</span></span>
+      <button type="button" role="tab" data-d="fk" aria-selected="false"><span class="en">Karachi Board</span><span class="ur">کراچی بورڈ</span></button>
+      <button type="button" role="tab" data-d="fo" aria-selected="false"><span class="en">Other Board</span><span class="ur">دوسرا بورڈ</span></button>
+      <button type="button" role="tab" data-d="fl" aria-selected="false"><span class="en">O-Level</span><span class="ur">او لیول</span></button>
+    </div>
+    <div class="card docbox">
+      <div class="dochead"><h3 id="dtitle"></h3><div class="prog"><div class="bar"><i id="pbar"></i></div><span id="ptxt"></span></div></div>
+      <ul class="checks" id="checks"></ul>
+      <div class="photo">
+        <div><div class="ph" aria-hidden="true"></div><div class="mm">35 × 45 mm</div></div>
+        <ul>
+          <li><span class="en">Recent photo with a <b>blue background</b></span><span class="ur">تازہ تصویر، <b>نیلا بیک گراؤنڈ</b></span></li>
+          <li><span class="en">Full face, hair and both eyes clearly visible</span><span class="ur">پورا چہرہ، بال اور دونوں آنکھیں صاف نظر آئیں</span></li>
+          <li><span class="en">No selfie, filter or group photo</span><span class="ur">سیلفی، فلٹر یا گروپ تصویر نہ ہو</span></li>
+          <li><span class="en">The online form lets you crop it to the slip size</span><span class="ur">آن لائن فارم میں تصویر سلپ کے سائز میں کاٹی جا سکتی ہے</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="note"><span class="en">When you visit the college, bring the <b>originals and photocopies</b> of all documents.</span><span class="ur">کالج آتے وقت تمام دستاویزات کی <b>اصل اور فوٹو کاپیاں</b> ساتھ لائیں۔</span></div>
+  </section>
+
+  <section id="faculties" aria-labelledby="h-fac">
+    <div class="sh"><span class="eyebrow"><span class="en">Class XI</span><span class="ur">جماعت گیارہویں</span></span><h2 id="h-fac"><span class="en">Faculties and subjects</span><span class="ur">فیکلٹیز اور مضامین</span></h2></div>
+    <div class="fac" id="fac"></div>
+  </section>
+
+  <section id="cutoff" aria-labelledby="h-cut">
+    <div class="sh"><span class="eyebrow"><span class="en">Merit</span><span class="ur">میرٹ</span></span><h2 id="h-cut"><span class="en">SECCAP cut-off 2026–27</span><span class="ur">سیکیپ کٹ آف <span class="num">2026–27</span></span></h2><p><span class="en">Cut-off of Govt. National College (Morning) in SECCAP for Class XI.</span><span class="ur">جماعت گیارہویں کے لیے سیکیپ میں گورنمنٹ نیشنل کالج (مارننگ) کا کٹ آف۔</span></p></div>
+    <div class="card cut" id="cut"></div>
+  </section>
+
+  <section id="enrollment" aria-labelledby="h-enr">
+    <div class="sh"><span class="eyebrow"><span class="en">Board enrollment</span><span class="ur">بورڈ اینرولمنٹ</span></span><h2 id="h-enr"><span class="en">Board Enrollment Card</span><span class="ur">بورڈ اینرولمنٹ کارڈ</span></h2><p><span class="en">The Board has issued enrollment cards for Second Year (XII) students. Download yours online.</span><span class="ur">بورڈ نے سال دوم (جماعت بارہویں) کے طلبہ کے اینرولمنٹ کارڈ جاری کر دیے ہیں۔ اپنا کارڈ آن لائن ڈاؤن لوڈ کریں۔</span></p></div>
+    <div class="two">
+      <div class="card info">
+        <h3><span class="en">How to download</span><span class="ur">ڈاؤن لوڈ کا طریقہ</span></h3>
+        <ol>
+          <li><span class="en">Open the link below.</span><span class="ur">نیچے دیا گیا لنک کھولیں۔</span></li>
+          <li><span class="en">Enter your <b>XI College Roll No.</b> (the one you got in First Year).</span><span class="ur">اپنا <b>گیارہویں کا کالج رول نمبر</b> لکھیں (جو فرسٹ ایئر میں ملا تھا)۔</span></li>
+          <li><span class="en">Enter your <b>Matric Roll No.</b></span><span class="ur">اپنا <b>میٹرک رول نمبر</b> لکھیں۔</span></li>
+          <li><span class="en">Find your card, then download it.</span><span class="ur">کارڈ تلاش کریں، پھر ڈاؤن لوڈ کریں۔</span></li>
+        </ol>
+        <div class="row"><a class="btn solid" href="https://script.google.com/macros/s/AKfycbw6V0Iqh_JYiTaNFiXJikddGGzGmYP1fLGlyNE_mMC98d-9rW4s6HDvHApdxL5-V39gdQ/exec" target="_blank" rel="noopener"><span class="en">Download Enrollment Card</span><span class="ur">اینرولمنٹ کارڈ ڈاؤن لوڈ کریں</span></a></div>
+      </div>
+      <div class="card info">
+        <h3><span class="en">Please note</span><span class="ur">توجہ فرمائیں</span></h3>
+        <ul>
+          <li><span class="en">Check your <b>name, father's name and photo</b> on the card. If anything is wrong, contact the college office right away.</span><span class="ur">کارڈ پر اپنا <b>نام، والد کا نام اور تصویر</b> چیک کریں۔ کچھ غلط ہو تو فوراً کالج آفس سے رابطہ کریں۔</span></li>
+          <li><span class="en">Download only your own card. Do not use anyone else's numbers.</span><span class="ur">صرف اپنا کارڈ ڈاؤن لوڈ کریں، کسی اور کے نمبر استعمال نہ کریں۔</span></li>
+          <li><span class="en">After 5 wrong attempts, that Roll No. is locked for 15 minutes.</span><span class="ur">پانچ غلط کوششوں کے بعد وہ رول نمبر 15 منٹ کے لیے بند ہو جاتا ہے۔</span></li>
+          <li><span class="en">If the link says "Sorry, unable to open the file", open it in a Chrome Incognito tab.</span><span class="ur">اگر لنک پر "Sorry, unable to open the file" آئے تو کروم کی Incognito ٹیب میں کھولیں۔</span></li>
+          <li><span class="en">"Record not found" or "Card not found": visit the college office with your College Roll No. and Matric Roll No.</span><span class="ur">"ریکارڈ نہیں ملا" یا "کارڈ نہیں ملا" آئے تو کالج رول نمبر اور میٹرک رول نمبر کے ساتھ کالج آفس آئیں۔</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="h-faq">
+    <div class="sh"><span class="eyebrow"><span class="en">Help</span><span class="ur">مدد</span></span><h2 id="h-faq"><span class="en">Frequently asked questions</span><span class="ur">عام سوالات</span></h2></div>
+    <div class="faqs">
+      <label for="fq" class="en" style="position:absolute;left:-9999px">Search questions</label>
+      <input id="fq" type="search" autocomplete="off">
+      <div id="faqlist"></div>
+      <p id="nofaq" hidden><span class="en">No question matches. Please contact the college office.</span><span class="ur">کوئی سوال نہیں ملا۔ کالج آفس سے رابطہ کریں۔</span></p>
+    </div>
+  </section>
+
+  <section id="staff" aria-labelledby="h-staff">
+    <div class="sh"><span class="eyebrow"><span class="en">For teachers and staff</span><span class="ur">اساتذہ اور عملے کے لیے</span></span><h2 id="h-staff"><span class="en">Salary Slip Portal</span><span class="ur">سیلری سلپ پورٹل</span></h2><p><span class="en">College teachers and staff can download their salary slips here. Not for students.</span><span class="ur">کالج کے اساتذہ اور عملہ یہاں سے اپنی سیلری سلپ ڈاؤن لوڈ کر سکتے ہیں۔ یہ طلبہ کے لیے نہیں۔</span></p></div>
+    <div class="two">
+      <div class="card info">
+        <h3><span class="en">How to use</span><span class="ur">طریقہ</span></h3>
+        <ol>
+          <li><span class="en">Open the portal.</span><span class="ur">پورٹل کھولیں۔</span></li>
+          <li><span class="en">Enter your <b>Personnel Number</b> and <b>CNIC</b>, then continue.</span><span class="ur">اپنا <b>پرسونل نمبر</b> اور <b>شناختی کارڈ نمبر</b> لکھیں، پھر آگے بڑھیں۔</span></li>
+          <li><span class="en">Enter the 6-digit code sent to your email (or your PIN, if you were given one) and verify.</span><span class="ur">ای میل پر آیا ہوا چھ ہندسوں کا کوڈ لکھیں (جنہیں پن دیا گیا ہے وہ اپنا پن لکھیں) اور تصدیق کریں۔</span></li>
+          <li><span class="en">Choose the year, then press <b>Download</b> next to the month.</span><span class="ur">سال منتخب کریں، پھر مہینے کے سامنے <b>Download</b> دبائیں۔</span></li>
+        </ol>
+        <div class="row">
+          <a class="btn solid" href="https://script.google.com/macros/s/AKfycbyuTQtponS5g2JFbPFS64W6DaCJUitUDn_6kGAx_rqOscU9dYdlkjBxs8gyeXtwJsJ5/exec" target="_blank" rel="noopener"><span class="en">Open Salary Portal</span><span class="ur">سیلری پورٹل کھولیں</span></a>
+          <a class="btn out" href="https://docs.google.com/forms/d/e/1FAIpQLSeLEFUnxSdwRpQqWe-BFlDnFsqrbJpnOT2jAC6d7MakiRxRiA/viewform" target="_blank" rel="noopener"><span class="en">First time? Register</span><span class="ur">پہلی بار؟ رجسٹریشن</span></a>
+        </div>
+      </div>
+      <div class="card info">
+        <h3><span class="en">Please note</span><span class="ur">توجہ فرمائیں</span></h3>
+        <ul>
+          <li><span class="en">"Registration pending": please wait, approval will come soon.</span><span class="ur">"Registration pending" آئے تو تھوڑا انتظار کریں، منظوری جلد ہو جائے گی۔</span></li>
+          <li><span class="en">Check the Spam / Promotions folder for the email code.</span><span class="ur">ای میل کا کوڈ Spam / Promotions فولڈر میں بھی دیکھیں۔</span></li>
+          <li><span class="en">Never share your code or PIN with anyone.</span><span class="ur">اپنا کوڈ یا پن کسی کے ساتھ شیئر نہ کریں۔</span></li>
+        </ul>
+        <p style="margin:14px 0 0"><span class="tag"><span class="en">Portal Admin</span><span class="ur">پورٹل ایڈمن</span></span> <b><span class="en">Syed Muhammad Jahanzaib</span><span class="ur">سید محمد جہانزیب</span></b></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="h-con">
+    <div class="sh"><span class="eyebrow"><span class="en">Contact</span><span class="ur">رابطہ</span></span><h2 id="h-con"><span class="en">Office and contact</span><span class="ur">دفتر اور رابطہ</span></h2></div>
+    <div class="contact">
+      <div class="card ci">
+        <div class="k"><span class="en">Office hours</span><span class="ur">دفتری اوقات</span></div>
+        <p style="margin:6px 0 0"><b><span class="en">Monday to Friday</span><span class="ur">پیر تا جمعہ</span></b><br><span class="en">8:00 AM to 1:30 PM</span><span class="ur">صبح 8:00 بجے سے دوپہر 1:30 بجے تک</span></p>
+        <p style="margin:6px 0 0;color:var(--muted)"><span class="en">Saturday and Sunday: closed</span><span class="ur">ہفتہ اور اتوار: چھٹی</span></p>
+      </div>
+      <div class="card ci">
+        <div class="k"><span class="en">Phone</span><span class="ur">فون</span></div>
+        <div class="person"><div><b><span class="en">Sajjad Ali Memon</span><span class="ur">سجاد علی میمن</span></b><span class="phone" id="p1">+92 333 2448443</span></div><button class="copy" type="button" data-c="p1"><span class="en">Copy</span><span class="ur">کاپی</span></button></div>
+        <div class="person"><div><b><span class="en">Syed Muhammad Jahanzaib</span><span class="ur">سید محمد جہانزیب</span></b><span class="phone" id="p2">0334 3444610</span></div><button class="copy" type="button" data-c="p2"><span class="en">Copy</span><span class="ur">کاپی</span></button></div>
+      </div>
+      <div class="card ci">
+        <div class="k"><span class="en">Location and email</span><span class="ur">مقام اور ای میل</span></div>
+        <p style="margin:6px 0 0"><b><span class="en">Govt. National College (Morning), Karachi</span><span class="ur">گورنمنٹ نیشنل کالج (مارننگ)، کراچی</span></b></p>
+        <p style="margin:4px 0 0"><span class="mail">govtnationalno1college@gmail.com</span></p>
+        <div class="row" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
+          <a class="btn out" href="https://maps.app.goo.gl/5RZTDBZNfoEu52ge6?g_st=ac" target="_blank" rel="noopener"><span class="en">Open in Google Maps</span><span class="ur">گوگل میپ پر دیکھیں</span></a>
+          <a class="btn out" href="https://whatsapp.com/channel/0029VbDTnoP7j6g4Ll3sgT3F" target="_blank" rel="noopener"><span class="en">WhatsApp Channel</span><span class="ur">واٹس ایپ چینل</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b><span class="en">Govt. National College (Morning), Karachi</span><span class="ur">گورنمنٹ نیشنل کالج (مارننگ)، کراچی</span></b><br><span class="en">Official admission information</span><span class="ur">داخلے کی سرکاری معلومات</span></div>
+    <div><span class="en">Last updated: 23 Oct 2026</span><span class="ur">آخری تبدیلی: <span class="num">23 Oct 2026</span></span></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  function lang() { return root.getAttribute('lang') === 'ur' ? 'ur' : 'en'; }
+  function setLang(l) {
+    root.setAttribute('lang', l);
+    root.setAttribute('dir', l === 'ur' ? 'rtl' : 'ltr');
+    try { localStorage.setItem('gnckLang', l); } catch (e) {}
+    renderAll();
+  }
+  var saved = 'en';
+  try { saved = localStorage.getItem('gnckLang') || 'en'; } catch (e) {}
+  root.setAttribute('lang', saved === 'ur' ? 'ur' : 'en');
+  root.setAttribute('dir', saved === 'ur' ? 'rtl' : 'ltr');
+  document.getElementById('langbtn').addEventListener('click', function () { setLang(lang() === 'ur' ? 'en' : 'ur'); });
+  function T(en, ur) { return lang() === 'ur' ? ur : en; }
+
+  /* ---------- live status ---------- */
+  var OPEN = new Date('2026-11-01T00:00:00+05:00'), CLOSE = new Date('2026-12-31T23:59:00+05:00');
+  function tick() {
+    var n = new Date(), big = document.getElementById('sbig'), dot = document.getElementById('sdot'), box = document.getElementById('scount'), target;
+    if (n < OPEN) { target = OPEN; big.textContent = T('Opens on 1 November 2026', 'فارم 1 نومبر 2026 سے شروع ہوگا'); dot.className = 'dot'; }
+    else if (n <= CLOSE) { target = CLOSE; big.textContent = T('Open now. Closes on 31 December 2026', 'فارم جاری ہے، 31 دسمبر 2026 کو بند ہوگا'); dot.className = 'dot live'; }
+    else { big.textContent = T('The online form is closed', 'آن لائن فارم بند ہو چکا ہے'); dot.className = 'dot off'; box.hidden = true; return; }
+    box.hidden = false;
+    var m = Math.max(0, Math.floor((target - n) / 60000));
+    document.getElementById('cd').textContent = Math.floor(m / 1440);
+    document.getElementById('ch').textContent = Math.floor(m / 60) % 24;
+    document.getElementById('cm').textContent = m % 60;
+  }
+
+  /* ---------- documents ---------- */
+  var DOCS = {
+    sm: { t: ['SECCAP documents: Matric', 'سیکیپ دستاویزات: میٹرک'], items: [
+      ['Admission form (with the granted provisional admission)', 'داخلہ فارم (عارضی داخلے کے ساتھ)'],
+      ['9th marksheet (if Matric year 2026)', 'نویں جماعت کی مارکس شیٹ (اگر میٹرک 2026 ہے)'],
+      ['10th marksheet (if Matric year 2025)', 'دسویں جماعت کی مارکس شیٹ (اگر میٹرک 2025 ہے)'],
+      ['10th class admit card', 'دسویں جماعت کا ایڈمٹ کارڈ'],
+      ['CNIC / B-Form of student', 'طالب علم کا شناختی کارڈ / ب فارم'],
+      ['CNIC of father', 'والد کا شناختی کارڈ'],
+      ['Two self-addressed envelopes', 'اپنے پتے والے دو لفافے'],
+      ['Domicile of student (if not available now, submit it with the Matric pass marksheet)', 'طالب علم کا ڈومیسائل (ابھی نہ ہو تو میٹرک پاس مارکس شیٹ کے ساتھ جمع کرائیں)'],
+      ['Recent passport-size photograph with blue background', 'نیلے بیک گراؤنڈ والی تازہ پاسپورٹ سائز تصویر'],
+      ['Undertaking of 75% attendance', '75 فیصد حاضری کا حلف نامہ']] },
+    so: { t: ['SECCAP documents: O-Level', 'سیکیپ دستاویزات: او لیول'], items: [
+      ['O-Level final result / certificates', 'او لیول کا فائنل رزلٹ / سرٹیفکیٹس'],
+      ['IBCC Equivalence Certificate', 'آئی بی سی سی ایکوئیولنس سرٹیفکیٹ'],
+      ['Character certificate', 'کریکٹر سرٹیفکیٹ'],
+      ['Student / father / guardian B-Form / CNIC', 'طالب علم / والد / سرپرست کا ب فارم / شناختی کارڈ'],
+      ['Coloured photograph', 'رنگین تصویر'],
+      ['Undertaking to ensure 75% attendance, in black and white, by parent / guardian', 'والدین / سرپرست کی طرف سے 75 فیصد حاضری کا حلف نامہ (بلیک اینڈ وائٹ)']] },
+    fk: { t: ['Online form uploads: Karachi Board', 'آن لائن فارم اپ لوڈ: کراچی بورڈ'], items: [
+      ['Temporary admission slip (SECCAP)', 'عارضی داخلہ سلپ (سیکیپ)'],
+      ['Matric marksheet', 'میٹرک کی مارکس شیٹ'],
+      ['9th marksheet', 'نویں جماعت کی مارکس شیٹ'],
+      ['Passport photo (blue background)', 'پاسپورٹ تصویر (نیلا بیک گراؤنڈ)']] },
+    fo: { t: ['Online form uploads: Other Board', 'آن لائن فارم اپ لوڈ: دوسرا بورڈ'], items: [
+      ['Temporary admission slip (SECCAP)', 'عارضی داخلہ سلپ (سیکیپ)'],
+      ['Matric marksheet', 'میٹرک کی مارکس شیٹ'],
+      ['9th marksheet', 'نویں جماعت کی مارکس شیٹ'],
+      ['Passport photo (blue background)', 'پاسپورٹ تصویر (نیلا بیک گراؤنڈ)'],
+      ['Migration certificate', 'مائیگریشن سرٹیفکیٹ'],
+      ['Permission letter', 'اجازت نامہ']] },
+    fl: { t: ['Online form uploads: O-Level', 'آن لائن فارم اپ لوڈ: او لیول'], items: [
+      ['Temporary admission slip (SECCAP)', 'عارضی داخلہ سلپ (سیکیپ)'],
+      ['O-Level result', 'او لیول کا رزلٹ'],
+      ['IBCC Equivalence certificate (write its number in the form)', 'آئی بی سی سی ایکوئیولنس سرٹیفکیٹ (اس کا نمبر فارم میں لکھیں)'],
+      ['Passport photo (blue background)', 'پاسپورٹ تصویر (نیلا بیک گراؤنڈ)']] }
+  };
+  var cur = 'sm', ticks = {};
+  try { ticks = JSON.parse(localStorage.getItem('gnckDocs') || '{}') || {}; } catch (e) { ticks = {}; }
+  function saveTicks() { try { localStorage.setItem('gnckDocs', JSON.stringify(ticks)); } catch (e) {} }
+  function prog() {
+    var all = document.querySelectorAll('#checks input'), on = document.querySelectorAll('#checks input:checked').length;
+    document.getElementById('pbar').style.width = (all.length ? on / all.length * 100 : 0) + '%';
+    document.getElementById('ptxt').textContent = on + ' / ' + all.length + ' ' + T('ready', 'تیار');
+  }
+  function drawDocs() {
+    var d = DOCS[cur], ul = document.getElementById('checks');
+    document.getElementById('dtitle').textContent = T(d.t[0], d.t[1]);
+    ul.innerHTML = '';
+    d.items.forEach(function (x, i) {
+      var id = 'doc-' + cur + '-' + i, li = document.createElement('li'), lab = document.createElement('label'), inp = document.createElement('input'), sp = document.createElement('span');
+      lab.htmlFor = id; inp.type = 'checkbox'; inp.id = id; inp.checked = !!ticks[id]; sp.textContent = T(x[0], x[1]);
+      lab.appendChild(inp); lab.appendChild(sp); li.appendChild(lab); ul.appendChild(li);
+    });
+    prog();
+  }
+  document.getElementById('checks').addEventListener('change', function (e) { ticks[e.target.id] = e.target.checked; saveTicks(); prog(); });
+  document.querySelectorAll('.tabsbar button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.tabsbar button').forEach(function (o) { o.setAttribute('aria-selected', o === b ? 'true' : 'false'); });
+      cur = b.getAttribute('data-d'); drawDocs();
+    });
+  });
+
+  /* ---------- faculties ---------- */
+  var FAC = [
+    { c: 'PRE-ENG', n: ['Pre-Engineering', 'پری انجینئرنگ'], s: [['Physics', 'فزکس'], ['Chemistry', 'کیمسٹری'], ['Mathematics', 'ریاضی']] },
+    { c: 'PRE-MED', n: ['Pre-Medical', 'پری میڈیکل'], s: [['Physics', 'فزکس'], ['Chemistry', 'کیمسٹری'], ['Biology', 'حیاتیات']] },
+    { c: 'CS', n: ['Computer Science', 'کمپیوٹر سائنس'], s: [['Physics', 'فزکس'], ['Mathematics', 'ریاضی'], ['Computer Science', 'کمپیوٹر سائنس']] },
+    { c: 'COM', n: ['Commerce', 'کامرس'], s: [['Accounting', 'اکاؤنٹنگ'], ['Economics', 'معاشیات'], ['Commerce', 'کامرس'], ['Business Mathematics', 'بزنس میتھمیٹکس']] },
+    { c: 'HUM', n: ['Humanities', 'ہیومینٹیز'], wide: true,
+      req: [['Islamic Studies', 'اسلامیات'], ['English', 'انگریزی'], ['Urdu', 'اردو']],
+      s: [['Muslim History', 'مسلم تاریخ'], ['Civics', 'شہریت'], ['Education', 'تعلیم'], ['Economics', 'معاشیات'], ['Islamic Education', 'اسلامی تعلیمات'], ['Sociology', 'عمرانیات'], ['Psychology', 'نفسیات'], ['Library Science', 'لائبریری سائنس'], ['Physical Education', 'جسمانی تعلیم'], ['Sindhi', 'سندھی'], ['Advanced English', 'ایڈوانس انگلش'], ['Geography', 'جغرافیہ'], ['Statistics', 'شماریات'], ['Computer Science', 'کمپیوٹر سائنس'], ['Mathematics', 'ریاضی']] }
+  ];
+  function drawFac() {
+    var box = document.getElementById('fac'); box.innerHTML = '';
+    FAC.forEach(function (f) {
+      var d = document.createElement('div'); d.className = 'card fc' + (f.wide ? ' wide' : '');
+      var h = '<div class="code">' + f.c + '</div><h3>' + T(f.n[0], f.n[1]) + '</h3>';
+      if (f.req) h += '<div class="lbl">' + T('Compulsory', 'لازمی') + '</div><div class="chips">' + f.req.map(function (x) { return '<span class="chip req">' + T(x[0], x[1]) + '</span>'; }).join('') + '</div><div class="lbl">' + T('Electives', 'اختیاری مضامین') + '</div>';
+      h += '<div class="chips">' + f.s.map(function (x) { return '<span class="chip">' + T(x[0], x[1]) + '</span>'; }).join('') + '</div>';
+      d.innerHTML = h; box.appendChild(d);
+    });
+  }
+
+  /* ---------- cut-off ---------- */
+  var CUT = [[['Pre-Engineering', 'پری انجینئرنگ'], 230], [['Pre-Medical', 'پری میڈیکل'], 348], [['Computer Science', 'کمپیوٹر سائنس'], 441], [['Commerce', 'کامرس'], 393], [['Humanities', 'ہیومینٹیز'], 185]];
+  function drawCut() {
+    var box = document.getElementById('cut'), max = 0; box.innerHTML = '';
+    CUT.forEach(function (c) { if (c[1] > max) max = c[1]; });
+    CUT.forEach(function (c) {
+      var r = document.createElement('div'); r.className = 'cr';
+      r.innerHTML = '<span>' + T(c[0][0], c[0][1]) + '</span><div class="bar"><i style="width:' + (c[1] / max * 100) + '%"></i></div><b>' + c[1] + '</b>';
+      box.appendChild(r);
+    });
+  }
+
+  /* ---------- FAQ ---------- */
+  var FAQ = [
+    ['The form says my numbers do not match the college list.', 'Only students confirmed through SECCAP can fill the form. Check the College Roll No. and Matric Roll No. on your temporary slip. If it still does not open, contact the college office.',
+     'فارم پر لکھا آتا ہے کہ نمبر کالج کی فہرست سے نہیں ملتے۔', 'فارم صرف وہ طلبہ بھر سکتے ہیں جن کا داخلہ سیکیپ سے کنفرم ہو۔ عارضی سلپ پر کالج رول نمبر اور میٹرک رول نمبر دوبارہ دیکھیں۔ پھر بھی نہ کھلے تو کالج آفس سے رابطہ کریں۔'],
+    ['I do not remember my College Roll No.', 'It is printed on your SECCAP temporary slip. If you lost the slip, visit the office with your Matric Roll No.',
+     'مجھے اپنا کالج رول نمبر یاد نہیں۔', 'یہ آپ کی سیکیپ عارضی سلپ پر لکھا ہوتا ہے۔ سلپ گم ہو جائے تو میٹرک رول نمبر کے ساتھ آفس آئیں۔'],
+    ['My photo is not uploading.', 'Use a clear JPG or PNG photo with a blue background, not a PDF. The form lets you crop it to the slip size.',
+     'میری تصویر اپ لوڈ نہیں ہو رہی۔', 'نیلے بیک گراؤنڈ والی صاف JPG یا PNG تصویر استعمال کریں، PDF نہیں۔ فارم میں تصویر سلپ کے سائز میں کاٹی جا سکتی ہے۔'],
+    ['There is an objection on my form. What should I do?', 'The reason is shown on the status page. Correct that document and upload it again, or visit the college office.',
+     'میرے فارم پر اعتراض لگا ہے، اب کیا کروں؟', 'اعتراض کی وجہ صورتحال والے صفحے پر لکھی ہوتی ہے۔ وہی دستاویز درست کر کے دوبارہ اپ لوڈ کریں یا کالج آفس آئیں۔'],
+    ['I passed from another board or O-Level.', 'Choose your board at the start of the form. Other boards need a Migration certificate and Permission letter; O-Level needs the IBCC Equivalence certificate.',
+     'میں نے دوسرے بورڈ یا او لیول سے پاس کیا ہے۔', 'فارم کے شروع میں اپنا بورڈ منتخب کریں۔ دوسرے بورڈ کے لیے مائیگریشن سرٹیفکیٹ اور اجازت نامہ، اور او لیول کے لیے آئی بی سی سی ایکوئیولنس سرٹیفکیٹ ضروری ہے۔'],
+    ['I lost my admission slip.', 'You can download it again from the status page, or get a duplicate slip from the college office.',
+     'میری داخلہ سلپ گم ہو گئی ہے۔', 'صورتحال والے صفحے سے دوبارہ ڈاؤن لوڈ کر سکتے ہیں، یا کالج آفس سے ڈپلیکیٹ سلپ لے سکتے ہیں۔'],
+    ['How do I know a slip is genuine?', 'Scan the QR code on the slip, or enter the College Roll No., Receipt No. and Verification Code on the Verify a Slip page. The name, photo and pattern must match the slip.',
+     'کیسے معلوم ہو کہ سلپ اصلی ہے؟', 'سلپ کا کیو آر کوڈ اسکین کریں، یا "سلپ کی تصدیق" کے صفحے پر کالج رول نمبر، رسید نمبر اور ویریفکیشن کوڈ لکھیں۔ نام، تصویر اور نقش سلپ جیسے ہونے چاہئیں۔'],
+    ['Someone is asking for money for admission.', 'Admission is completely free. Do not pay anyone, and complain at govtnationalno1college@gmail.com.',
+     'کوئی داخلے کے پیسے مانگ رہا ہے۔', 'داخلہ بالکل مفت ہے۔ کسی کو پیسے نہ دیں اور govtnationalno1college@gmail.com پر شکایت کریں۔']
+  ];
+  function drawFaq() {
+    var box = document.getElementById('faqlist'), q = document.getElementById('fq'), shown = 0, s = q.value.trim().toLowerCase();
+    q.placeholder = T('Search, e.g. photo, slip, roll', 'تلاش کریں، مثلاً تصویر، سلپ، رول');
+    box.innerHTML = '';
+    FAQ.forEach(function (f) {
+      var qq = T(f[0], f[2]), aa = T(f[1], f[3]);
+      if (s && (qq + ' ' + aa).toLowerCase().indexOf(s) < 0) return;
+      var d = document.createElement('details'), sm = document.createElement('summary'), p = document.createElement('p');
+      sm.textContent = qq; p.textContent = aa; d.appendChild(sm); d.appendChild(p);
+      if (s) d.open = true;
+      box.appendChild(d); shown++;
+    });
+    document.getElementById('nofaq').hidden = shown > 0;
+  }
+  document.getElementById('fq').addEventListener('input', drawFaq);
+
+  /* ---------- copy phone ---------- */
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var el = document.getElementById(b.getAttribute('data-c')), old = b.innerHTML;
+      function done(m) { b.textContent = m; setTimeout(function () { b.innerHTML = old; }, 1500); }
+      function sel() { var r = document.createRange(); r.selectNodeContents(el); var x = getSelection(); x.removeAllRanges(); x.addRange(r); done(T('Selected', 'منتخب')); }
+      try { navigator.clipboard.writeText(el.textContent).then(function () { done(T('Copied', 'کاپی ہو گیا')); }, sel); } catch (e) { sel(); }
+    });
+  });
+
+  /* ---------- nav highlight ---------- */
+  var links = document.querySelectorAll('.navlinks a');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id); }); });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('main section[id]').forEach(function (s) { io.observe(s); });
+  }
+
+  function renderAll() { tick(); drawDocs(); drawFac(); drawCut(); drawFaq(); }
+  renderAll();
+  setInterval(tick, 30000);
+})();
+</script>
+
+</body>
+</html>
