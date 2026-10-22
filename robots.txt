@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://govt-national-college-morning.github.io/sitemap.xml
