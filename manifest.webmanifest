@@ -1,0 +1,20 @@
+{
+  "id": "/",
+  "name": "GNCK Admission - Govt. National College (Morning), Karachi",
+  "short_name": "GNCK Admission",
+  "description": "XI admission 2026-27: online form, status and slip, slip verification, documents, cut-off, Board enrollment card and the staff Salary Slip Portal. Admission is free.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b3d24",
+  "theme_color": "#0b3d24",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
