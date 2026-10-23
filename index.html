@@ -76,7 +76,7 @@ a { color: var(--accent); }
 /* ---------- Top bar ---------- */
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 20; background: var(--green); }
 .top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 15; background: var(--green); color: #fff; border-bottom: 3px solid var(--gold); }
-.top .wrap { display: flex; align-items: center; gap: 12px; padding-block: 8px; }
+.top .wrap { max-width: 1240px; display: flex; align-items: center; gap: 12px; padding-block: 8px; }
 .brandmini { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; min-width: 0; }
 .brandmini img { width: 38px; height: 38px; border-radius: 50%; background: #fff; padding: 2px; flex: none; }
 .brandmini b { font-family: var(--f-display); font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -289,6 +289,31 @@ html[lang="ur"] .qt .badge { font-family: var(--f-urdu); letter-spacing: 0; }
 .instbtn { flex: none; font: inherit; font-weight: 700; font-size: .85rem; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.55); border-radius: 8px; padding: 5px 10px; cursor: pointer; }
 @media (max-width: 860px) { .instbtn { margin-inline-start: auto; } .instbtn + .langbtn { margin-inline-start: 0; } }
 @media (display-mode: standalone) { .inst, .instbtn { display: none !important; } }
+
+/* ---------- v1.7: Staff Login menu (four dots) ---------- */
+.smenu { position: relative; flex: none; }
+.smbtn { display: flex; align-items: center; gap: 6px; font: inherit; font-weight: 700; font-size: .85rem; background: rgba(255,255,255,.1); color: #fff; border: 1.5px solid rgba(255,255,255,.4); border-radius: 8px; padding: 5px 9px; cursor: pointer; }
+.smbtn svg { width: 18px; height: 18px; flex: none; }
+.smbtn[aria-expanded="true"] { background: var(--gold); color: #1d1600; border-color: var(--gold); }
+@media (max-width: 520px) { .smbtn .lbl { display: none; } }
+@media (max-width: 860px) { .smenu { margin-inline-start: auto; } .instbtn:not([hidden]) + .smenu, .smenu + .langbtn { margin-inline-start: 0; } }
+.smpanel { position: absolute; top: calc(100% + 10px); inset-inline-end: 0; width: min(320px, calc(100vw - 24px)); background: var(--card); color: var(--fg); border: 1px solid var(--line); border-top: 4px solid var(--gold); border-radius: 12px; box-shadow: 0 12px 32px rgba(0,0,0,.28); padding: 8px; z-index: 30; }
+.smpanel[hidden] { display: none; }
+.smpanel .hd { font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 8px 10px 4px; font-family: var(--f-body); }
+html[lang="ur"] .smpanel .hd { letter-spacing: 0; text-transform: none; font-family: var(--f-urdu); }
+.smpanel a { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; text-decoration: none; color: var(--fg); font-weight: 600; font-size: .95rem; }
+.smpanel a:hover { background: var(--chip); }
+.smpanel a .i { width: 32px; height: 32px; border-radius: 8px; background: var(--chip); color: var(--accent); display: grid; place-items: center; flex: none; }
+.smpanel a .i svg { width: 18px; height: 18px; }
+.smpanel a small { display: block; color: var(--muted); font-weight: 400; font-size: .8rem; line-height: 1.35; }
+html[lang="ur"] .smpanel a small { line-height: 1.8; }
+.smpanel a.soon { opacity: .6; cursor: default; }
+.smpanel a.soon:hover { background: transparent; }
+.smpanel a .sb { margin-inline-start: auto; font-size: .66rem; font-weight: 700; background: var(--warn-bg); color: var(--warn-fg); border-radius: 999px; padding: 1px 7px; white-space: nowrap; }
+.smpanel .sep { border-top: 1px solid var(--line); margin: 6px 4px; }
+.smpanel .nt { font-size: .78rem; color: var(--muted); padding: 6px 10px 4px; line-height: 1.45; }
+html[lang="ur"] .smpanel .nt { line-height: 1.9; }
+@media (max-width: 600px) { .smenu { position: static; } .smpanel { top: calc(100% + 6px); inset-inline: 12px; width: auto; max-height: calc(100vh - 90px); overflow-y: auto; } }
 footer { margin-top: 56px; background: var(--green); color: #cfe2d6; border-top: 4px solid var(--gold); }
 footer .wrap { padding-block: 22px 30px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: .9rem; }
 footer b { color: #fff; }
@@ -311,9 +336,24 @@ footer b { color: #fff; }
       <a href="#enrollment"><span class="en">Enrollment</span><span class="ur" data-nosnippet>اینرولمنٹ</span></a>
       <a href="#faq"><span class="en">FAQ</span><span class="ur" data-nosnippet>سوالات</span></a>
       <a href="#contact"><span class="en">Contact</span><span class="ur" data-nosnippet>رابطہ</span></a>
-      <a href="#staff"><span class="en">Staff</span><span class="ur" data-nosnippet>اسٹاف</span></a>
     </nav>
     <button class="instbtn" id="instbtn" type="button" hidden><span class="en">Install app</span><span class="ur" data-nosnippet>ایپ انسٹال کریں</span></button>
+    <div class="smenu">
+      <button class="smbtn" id="smbtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="smpanel"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="7" cy="7" r="2.6"/><circle cx="17" cy="7" r="2.6"/><circle cx="7" cy="17" r="2.6"/><circle cx="17" cy="17" r="2.6"/></svg><span class="lbl"><span class="en">Staff Login</span><span class="ur" data-nosnippet>اسٹاف لاگ ان</span></span></button>
+      <div class="smpanel" id="smpanel" role="menu" hidden>
+        <div class="hd"><span class="en">Teachers and staff</span><span class="ur" data-nosnippet>اساتذہ اور عملہ</span></div>
+        <a href="https://script.google.com/macros/s/AKfycbyuTQtponS5g2JFbPFS64W6DaCJUitUDn_6kGAx_rqOscU9dYdIkjBxs8gyeXtwJsJ5/exec" target="_blank" rel="noopener nofollow" role="menuitem"><span class="i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M16 13h2M3 10h18M7 6V4h10v2"/></svg></span><span><span class="en">Salary / Payslip Portal</span><span class="ur" data-nosnippet>سیلری / پے سلپ پورٹل</span><small><span class="en">Personnel No. + CNIC</span><span class="ur" data-nosnippet>پرسونل نمبر + شناختی کارڈ</span></small></span></a>
+        <a href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=staff" target="_blank" rel="noopener nofollow" role="menuitem"><span class="i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6a1 1 0 0 1 1 1v1H8V5a1 1 0 0 1 1-1z"/><rect x="5" y="5" width="14" height="16" rx="2"/><path d="m9 13 2 2 4-4"/></svg></span><span><span class="en">Staff Page (Admission)</span><span class="ur" data-nosnippet>اسٹاف صفحہ (داخلہ)</span><small><span class="en">Check online forms: username + PIN</span><span class="ur" data-nosnippet>آن لائن فارم کی جانچ: یوزر نیم + PIN</span></small></span></a>
+        <a class="soon" data-soon="attend" data-href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=attend" role="menuitem" aria-disabled="true"><span class="i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c.8-3.4 3.2-5 6-5s5.2 1.6 6 5M16 11l2 2 4-4"/></svg></span><span><span class="en">Teacher Attendance</span><span class="ur" data-nosnippet>اساتذہ کی حاضری</span><small><span class="en">Scan student ID cards</span><span class="ur" data-nosnippet>طلبہ کے آئی ڈی کارڈ اسکین</span></small></span><span class="sb"><span class="en">Coming soon</span><span class="ur" data-nosnippet>جلد</span></span></a>
+        <div class="sep"></div>
+        <div class="hd"><span class="en">Admin</span><span class="ur" data-nosnippet>ایڈمن</span></div>
+        <a href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=dashboard" target="_blank" rel="noopener nofollow" role="menuitem"><span class="i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span><span class="en">Dashboard</span><span class="ur" data-nosnippet>ڈیش بورڈ</span><small><span class="en">Admin PIN</span><span class="ur" data-nosnippet>ایڈمن PIN</span></small></span></a>
+        <a href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=admin" target="_blank" rel="noopener nofollow" role="menuitem"><span class="i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span><span><span class="en">Admin Verification</span><span class="ur" data-nosnippet>ایڈمن تصدیق</span><small><span class="en">Final OK, staff report: Admin PIN</span><span class="ur" data-nosnippet>فائنل OK، اسٹاف رپورٹ: ایڈمن PIN</span></small></span></a>
+        <a href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=scan" target="_blank" rel="noopener nofollow" role="menuitem"><span class="i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7 12h10"/></svg></span><span><span class="en">XI Scanner</span><span class="ur" data-nosnippet>XI اسکینر</span><small><span class="en">Board enrollment slip check: Admin PIN</span><span class="ur" data-nosnippet>بورڈ اینرولمنٹ سلپ کی جانچ: ایڈمن PIN</span></small></span></a>
+        <a class="soon" data-soon="attadmin" data-href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=attadmin" role="menuitem" aria-disabled="true"><span class="i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg></span><span><span class="en">Attendance Admin</span><span class="ur" data-nosnippet>حاضری ایڈمن</span><small><span class="en">Reports, leaves: Admin PIN</span><span class="ur" data-nosnippet>رپورٹ، چھٹیاں: ایڈمن PIN</span></small></span><span class="sb"><span class="en">Coming soon</span><span class="ur" data-nosnippet>جلد</span></span></a>
+        <div class="nt"><span class="en">Only for college staff. Every page opens with your own username / PIN. Never share your PIN.</span><span class="ur" data-nosnippet>صرف کالج کے عملے کے لیے۔ ہر صفحہ آپ کے اپنے یوزر نیم / PIN سے کھلتا ہے۔ اپنا PIN کسی کو نہ بتائیں۔</span></div>
+      </div>
+    </div>
     <button class="langbtn" id="langbtn" type="button"><span class="en">اردو</span><span class="ur" data-nosnippet>English</span></button>
   </div>
 </header>
@@ -743,16 +783,24 @@ footer b { color: #fff; }
 
   /* ---------- v1.6: Quick Access - tiles that need the new Google code (WEB8) ---------- */
   // true = the page exists in the admission web app (Code_v21.0 IDATTEND deployed)
-  var READY = { idcard: false, attendance: false };
-  document.querySelectorAll('.qt[data-soon]').forEach(function (t) {
+  var READY = { idcard: false, attendance: false, attend: false, attadmin: false };
+  document.querySelectorAll('.qt[data-soon], .smpanel a[data-soon]').forEach(function (t) {
     if (READY[t.getAttribute('data-soon')]) {
-      t.href = t.getAttribute('data-href'); t.target = '_blank'; t.rel = 'noopener';
+      t.href = t.getAttribute('data-href'); t.target = '_blank'; t.rel = 'noopener nofollow';
       t.classList.remove('soon'); t.removeAttribute('aria-disabled');
-      var bd = t.querySelector('.badge'); if (bd) bd.remove();
+      var bd = t.querySelector('.badge, .sb'); if (bd) bd.remove();
     } else {
       t.addEventListener('click', function (e) { e.preventDefault(); });
     }
   });
+
+
+  /* ---------- v1.7: Staff Login menu ---------- */
+  var smb = document.getElementById('smbtn'), smp = document.getElementById('smpanel');
+  function smenu(open) { smp.hidden = !open; smb.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  smb.addEventListener('click', function (e) { e.stopPropagation(); smenu(smp.hidden); });
+  document.addEventListener('click', function (e) { if (!smp.hidden && !smp.contains(e.target)) smenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !smp.hidden) { smenu(false); smb.focus(); } });
 
   /* ---------- v1.6: install the app (WEB3) ---------- */
   var deferred = null, ib = document.getElementById('instbtn'), ib2 = document.getElementById('instbtn2');
