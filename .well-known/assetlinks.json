@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.gnck.admission",
+      "sha256_cert_fingerprints": [
+        "D9:32:B1:A3:22:73:40:2C:76:0E:96:61:69:9B:EE:DE:F2:67:61:44:3A:B7:FE:14:20:BD:FD:55:32:BA:27:0E"
+      ]
+    }
+  }
+]
