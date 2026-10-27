@@ -1,7 +1,7 @@
-/* GNCK Admission - service worker (website v1.9.3).
+/* GNCK Admission - service worker (website v2.0).
    Our own files: the page opens even without internet (last saved copy).
    Google links (form, status, portal): never stored, always live from Google. */
-var CACHE = 'gnck-v1.9.3';
+var CACHE = 'gnck-v2.0';
 var CORE = ['/', '/index.html', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/icon-maskable-512.png', '/favicon.png', '/favicon-48.png', '/principal-full.jpg', '/pages.css'];
 
 self.addEventListener('install', function (e) {
@@ -19,7 +19,7 @@ self.addEventListener('fetch', function (e) {
   if (req.method !== 'GET') return;
   var url = new URL(req.url);
   if (url.origin !== self.location.origin) return;            // Google, fonts: straight to the internet
-  var fresh = url.pathname === '/notice.js' || /\.json$/.test(url.pathname);   // v1.9: notices always newest
+  var fresh = url.pathname === '/notice.js' || url.pathname === '/gallery.js' || /\.json$/.test(url.pathname);   // v1.9 notices, v2.0 gallery: always newest
   if (fresh || req.mode === 'navigate' || url.pathname === '/' || url.pathname === '/index.html') {
     // pages: newest from the internet, each page's saved copy only when offline (v1.8: every page keeps its own copy)
     var key = url.origin + url.pathname;
