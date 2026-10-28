@@ -4,7 +4,7 @@
 (function () {
   'use strict';
   // The Gallery web app link (Deploy > Web app > /exec). Empty = "coming soon".
-  var GALLERY_URL = '';
+  var GALLERY_URL = 'https://script.google.com/macros/s/AKfycbyw1ky7D3x_otPawiVXJOClJS0dU27wotrJ2Y_sMCKlY2wzk2D4RrhzCMRCOA3YsGGgSg/exec';
 
   var box = document.getElementById('gal');
   if (!box) return;
