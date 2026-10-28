@@ -1,7 +1,7 @@
-/* GNCK Admission - service worker (website v1.9.2).
+/* GNCK Admission - service worker (website v1.9.3).
    Our own files: the page opens even without internet (last saved copy).
    Google links (form, status, portal): never stored, always live from Google. */
-var CACHE = 'gnck-v1.9.2';
+var CACHE = 'gnck-v1.9.3';
 var CORE = ['/', '/index.html', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/icon-maskable-512.png', '/favicon.png', '/favicon-48.png', '/principal-full.jpg', '/pages.css'];
 
 self.addEventListener('install', function (e) {
