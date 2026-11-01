@@ -874,7 +874,7 @@ html[dir="rtl"] .pglink a { unicode-bidi: plaintext; }
 
   /* ---------- v1.6: Quick Access - tiles that need the new Google code (WEB8) ---------- */
   // true = the page exists in the admission web app (Code_v21.0 IDATTEND deployed)
-  var READY = { idcard: false, attendance: false, attend: false, attadmin: false };
+  var READY = { idcard: true, attendance: true, attend: true, attadmin: true };
   document.querySelectorAll('.qt[data-soon], .smpanel a[data-soon]').forEach(function (t) {
     if (READY[t.getAttribute('data-soon')]) {
       t.href = t.getAttribute('data-href'); t.target = '_blank'; t.rel = 'noopener nofollow';
