@@ -1,4 +1,4 @@
-/* GNCK website v2.1 - settings from the Control Panel (XI Code v21.4, WEB13).
+/* GNCK website v2.2 - settings (v2.2: ?preview=, Seats full) from the Control Panel (XI Code v21.4, WEB13).
    Reads <exec>?action=settings (public JSON: no passwords, no keys) and puts the
    admin's choices on the page: admission status + dates, buttons, sections,
    cut-off, FAQ, principal, contacts, links, office timings, email, maintenance.
@@ -39,10 +39,13 @@
     // closed faculties (form open for the others)
     var fc = $('#facclosed');
     var names = { PE: ['Pre-Engineering', 'پری انجینئرنگ'], PM: ['Pre-Medical', 'پری میڈیکل'], CS: ['Computer Science', 'کمپیوٹر سائنس'], CM: ['Commerce', 'کامرس'], HU: ['Humanities', 'ہیومینٹیز'] };
-    var off = Object.keys((s.form && s.form.fac) || {}).filter(function (k) { return s.form.fac[k] === false && names[k]; });
-    if (off.length && s.status !== 'CLOSED') {
+    var full = (s.form && s.form.full) || [];
+    var off = Object.keys((s.form && s.form.fac) || {}).filter(function (k) { return s.form.fac[k] === false && names[k] && full.indexOf(k) < 0; });
+    var fl = full.filter(function (k) { return names[k]; });
+    if ((off.length || fl.length) && s.status !== 'CLOSED') {
       if (!fc) { fc = document.createElement('div'); fc.id = 'facclosed'; fc.style.cssText = 'margin-top:10px;font-size:.85rem;background:#fff3cd;color:#6b5200;border-radius:8px;padding:6px 10px'; var st = $('aside.status'); if (st) st.appendChild(fc); }
-      fc.innerHTML = bil('Form closed for: ' + off.map(function (k) { return names[k][0]; }).join(', '), 'ان فیکلٹیز کا فارم بند: ' + off.map(function (k) { return names[k][1]; }).join('، '));
+      fc.innerHTML = (fl.length ? '<div>' + bil('Seats full: ' + fl.map(function (k) { return names[k][0]; }).join(', '), 'نشستیں پوری: ' + fl.map(function (k) { return names[k][1]; }).join('، ')) + '</div>' : '') +
+        (off.length ? '<div>' + bil('Form closed for: ' + off.map(function (k) { return names[k][0]; }).join(', '), 'ان فیکلٹیز کا فارم بند: ' + off.map(function (k) { return names[k][1]; }).join('، ')) + '</div>' : '');
     } else if (fc) fc.remove();
     // 2) maintenance banner
     var mb = $('#maintbar');
@@ -129,17 +132,25 @@
     try { navigator.clipboard.writeText(el.textContent).then(function () { done(G ? G.T('Copied', 'کاپی ہو گیا') : 'Copied'); }); } catch (x) {}
   });
 
+  // v2.2: ?preview=<id> = Control Panel draft (not saved yet); never stored on the phone
+  var pv = (location.search.match(/[?&]preview=([A-Za-z0-9]{6,20})/) || [])[1] || '';
   var last = null;
-  try { last = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+  if (!pv) { try { last = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {} }
   if (last && last.ok) { try { apply(last); } catch (e) {} }
+  function pvBar(t) {
+    var b = $('#pvbar');
+    if (!b) { b = document.createElement('div'); b.id = 'pvbar'; b.style.cssText = 'position:sticky;top:0;z-index:99;background:#c9a227;color:#13261b;text-align:center;padding:10px 14px;font-weight:700'; document.body.insertBefore(b, document.body.firstChild); }
+    b.innerHTML = t;
+  }
+  if (pv) pvBar(bil('PREVIEW: Control Panel changes, not saved yet. Visitors do not see this.', 'پیش نظارہ: کنٹرول پینل کی تبدیلیاں، ابھی محفوظ نہیں ہوئیں۔'));
   if (window.GNCK) GNCK.onRender = function () { if (last) try { apply(last); } catch (e) {} };
   var ctl = ('AbortController' in window) ? new AbortController() : null;
   var tm = setTimeout(function () { if (ctl) ctl.abort(); }, 9000);
-  fetch(EXEC + '?action=settings', { cache: 'no-store', signal: ctl ? ctl.signal : undefined }).then(function (r) { return r.json(); }).then(function (s) {
+  fetch(EXEC + '?action=settings' + (pv ? '&preview=' + pv : ''), { cache: 'no-store', signal: ctl ? ctl.signal : undefined }).then(function (r) { return r.json(); }).then(function (s) {
     clearTimeout(tm);
-    if (!s || !s.ok) return;
+    if (!s || !s.ok) { if (pv) pvBar(bil('Preview expired (15 minutes). Make a new one from the Control Panel.', 'پیش نظارہ ختم ہو گیا۔ کنٹرول پینل سے دوبارہ بنائیں۔')); return; }
     last = s;
-    try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+    if (!pv) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
     apply(s);
   }).catch(function () {});
 })();
