@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b3d24">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Live QR Attendance | GNCK Teachers</title>
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap">
+<script>try{if(localStorage.getItem('gnckLang')==='ur'){document.documentElement.lang='ur';document.documentElement.dir='rtl';}}catch(e){}</script>
+<style>
+:root{--g:#0b3d24;--g2:#145c39;--gold:#c9a227;--bg:#eef2ef;--card:#fff;--fg:#13261b;--muted:#5d6e64;--line:#d5ddd7;--ok:#1f8a4c;--late:#c77700;--bad:#c62828}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--fg);font-family:'Source Sans 3',Arial,sans-serif;font-size:16px;min-height:100vh}
+html[lang="ur"] body{font-family:'Noto Nastaliq Urdu','Source Sans 3',Arial,sans-serif}
+html[lang="en"] .ur,html[lang="ur"] .en{display:none}
+.top{background:linear-gradient(110deg,var(--g),var(--g2));color:#fff;border-bottom:4px solid var(--gold);padding:10px 14px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20}
+.top img{width:34px;height:34px;border-radius:50%;background:#fff;padding:2px}.top b{font-size:1rem;line-height:1.2;flex:1}.top small{display:block;color:#f3dc8f;font-weight:600;font-size:.78rem}
+.tb{background:#fff;color:var(--g);border:0;border-radius:16px;padding:6px 12px;font-weight:700;font-size:.82rem;cursor:pointer;font-family:inherit}
+.wrap{max-width:560px;margin:0 auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:12px}
+h1{font-size:1.25rem;color:var(--g);margin:0 0 4px}.muted{color:var(--muted);font-size:.88rem}
+label{display:block;font-weight:700;font-size:.9rem;margin:12px 0 4px}
+input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font-size:1rem;font-family:inherit;background:#fbfcfb}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--g);color:#fff;border:0;border-radius:10px;padding:12px 16px;font-weight:700;font-size:1rem;cursor:pointer;font-family:inherit;text-decoration:none}
+.btn.w{width:100%;margin-top:14px}.btn.o{background:#fff;color:var(--g);border:2px solid var(--g)}.btn.r{background:#fff;color:var(--bad);border:2px solid var(--bad)}.btn.gd{background:var(--gold);color:#13261b}
+.btn.s{padding:8px 12px;font-size:.88rem}.btn:disabled{opacity:.55}
+.msg{min-height:20px;color:var(--bad);font-weight:600;margin-top:10px;font-size:.92rem}
+.facs{display:grid;gap:10px;margin-top:12px}.facs .btn{justify-content:space-between;padding:16px;font-size:1.05rem}
+.cam{position:relative;background:#000;border-radius:14px;overflow:hidden;aspect-ratio:3/4;max-height:58vh;width:100%}
+.cam video{width:100%;height:100%;object-fit:cover;display:block}
+.frame{position:absolute;inset:14% 12%;border:3px solid rgba(255,255,255,.85);border-radius:16px;box-shadow:0 0 0 999px rgba(0,0,0,.28)}
+.frame:after{content:"";position:absolute;left:6%;right:6%;top:50%;height:2px;background:#4be08a;box-shadow:0 0 10px #4be08a;animation:sl 1.8s ease-in-out infinite}
+@keyframes sl{0%,100%{top:10%}50%{top:90%}}
+.pill{position:absolute;top:10px;inset-inline-start:10px;background:rgba(0,0,0,.6);color:#fff;border-radius:14px;padding:4px 10px;font-size:.8rem;font-weight:700}
+.camoff{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:20px;gap:12px}
+.res{display:flex;gap:12px;align-items:center;border-radius:14px;padding:12px;margin:12px 0;border:3px solid var(--line);background:#fff;min-height:96px}
+.res img{width:70px;height:88px;object-fit:cover;border-radius:8px;border:2px solid var(--g);flex:none;background:#e9eeea}
+.res .st{font-size:1.5rem;font-weight:800;letter-spacing:.5px}.res .nm{font-weight:700;font-size:1.05rem}.res .sm{color:var(--muted);font-size:.85rem}
+.res.ok{border-color:var(--ok);background:#ecf8f0}.res.ok .st{color:var(--ok)}.res.late{border-color:var(--late);background:#fff6e6}.res.late .st{color:var(--late)}
+.res.bad{border-color:var(--bad);background:#fdecec}.res.bad .st{color:var(--bad)}.res.al{border-color:#5b7fbf;background:#eef3fc}.res.al .st{color:#2f5aa8}
+.cnt{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;text-align:center}.cnt div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 2px}
+.cnt b{display:block;font-size:1.25rem}.cnt span{font-size:.72rem;color:var(--muted);font-weight:700}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.row .btn{flex:1 1 auto}
+.q{background:#fff3cd;color:#6b5200;border-radius:10px;padding:8px 12px;font-weight:600;font-size:.9rem;margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.list{max-height:60vh;overflow:auto}.lr{display:flex;align-items:center;gap:8px;padding:8px 2px;border-bottom:1px solid #e6ece8}
+.lr .n{flex:1;min-width:0}.lr .n b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lr .n small{color:var(--muted)}
+.chip{font-size:.75rem;font-weight:800;border-radius:8px;padding:3px 7px;background:#eceff1;color:#455a64;min-width:28px;text-align:center}
+.chip.P{background:#e3f4e8;color:var(--ok)}.chip.L{background:#fff1d6;color:var(--late)}.chip.A{background:#fde2e1;color:var(--bad)}.chip.LV{background:#e8eefc;color:#2f5aa8}
+.mk{border:1px solid #c3cfc7;background:#fff;border-radius:8px;padding:5px 8px;font-weight:800;cursor:pointer;font-family:inherit}
+.hide{display:none!important}
+.foot{text-align:center;color:var(--muted);font-size:.8rem;padding:10px 0 30px}
+</style>
+</head>
+<body>
+<header class="top">
+  <img src="/favicon-48.png" alt="">
+  <b><span class="en">Live QR Attendance</span><span class="ur">لائیو کیو آر حاضری</span><small><span class="en">GNCK teachers</span><span class="ur">جی این سی کے اساتذہ</span></small></b>
+  <button class="tb" id="langbtn" type="button"><span class="en">اردو</span><span class="ur">English</span></button>
+  <button class="tb hide" id="lo" type="button"><span class="en">Logout</span><span class="ur">لاگ آؤٹ</span></button>
+</header>
+<div class="wrap">
+
+<!-- 1. login -->
+<div id="s1" class="card">
+  <h1><span class="en">Teacher login</span><span class="ur">ٹیچر لاگ ان</span></h1>
+  <p class="muted"><span class="en">Same username and password as the Teacher Attendance page. The password stays only in this page's memory.</span><span class="ur">وہی یوزر نیم اور پاس ورڈ جو ٹیچر اٹینڈنس صفحے کا ہے۔ پاس ورڈ صرف اس صفحے کی میموری میں رہتا ہے۔</span></p>
+  <label for="u"><span class="en">Username</span><span class="ur">یوزر نیم</span></label>
+  <input class="f" id="u" autocomplete="username" autocapitalize="characters" spellcheck="false">
+  <label for="p"><span class="en">Password</span><span class="ur">پاس ورڈ</span></label>
+  <input class="f" id="p" type="password" autocomplete="current-password">
+  <button class="btn w" id="lb" type="button"><span class="en">Login</span><span class="ur">لاگ ان</span></button>
+  <div class="msg" id="m1"></div>
+</div>
+
+<!-- 2. class -->
+<div id="s2" class="card hide">
+  <h1><span class="en">Choose the class</span><span class="ur">کلاس منتخب کریں</span></h1>
+  <p class="muted" id="info"></p>
+  <div class="facs" id="facs"></div>
+  <div class="msg" id="m2"></div>
+</div>
+
+<!-- 3. scanner -->
+<div id="s3" class="hide">
+  <div class="card" style="padding:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px">
+      <b id="cls" style="color:var(--g)"></b>
+      <button class="btn o s" id="chg" type="button"><span class="en">Change class</span><span class="ur">کلاس بدلیں</span></button>
+    </div>
+    <div class="cam" id="cam">
+      <video id="v" playsinline muted autoplay></video>
+      <div class="frame" id="fr"></div>
+      <span class="pill" id="pill"></span>
+      <div class="camoff hide" id="camoff">
+        <div id="camtxt"></div>
+        <button class="btn gd" id="camgo" type="button"><span class="en">Start camera</span><span class="ur">کیمرہ چلائیں</span></button>
+      </div>
+    </div>
+    <div class="res" id="res"><div class="muted"><span class="en">Hold the student's ID card QR (phone or print) inside the box. Mark happens by itself with a beep.</span><span class="ur">طالب علم کے آئی ڈی کارڈ کا کیو آر (موبائل یا پرنٹ) خانے میں رکھیں۔ بیپ کے ساتھ حاضری خود لگ جائے گی۔</span></div></div>
+    <div class="cnt" id="cnt"></div>
+    <div class="q hide" id="qbar"><span id="qtxt"></span><button class="btn s" id="sync" type="button"><span class="en">Send now</span><span class="ur">ابھی بھیجیں</span></button></div>
+    <div class="row">
+      <button class="btn o s hide" id="torch" type="button">&#128294; <span class="en">Light</span><span class="ur">لائٹ</span></button>
+      <button class="btn o s" id="man" type="button">&#9000; <span class="en">By roll no.</span><span class="ur">رول نمبر سے</span></button>
+      <button class="btn o s" id="lst" type="button">&#9776; <span class="en">Class list</span><span class="ur">کلاس لسٹ</span></button>
+    </div>
+    <div class="row hide" id="manbox">
+      <input class="f" id="mroll" inputmode="numeric" placeholder="College Roll" style="flex:1">
+      <button class="btn s" id="mgo" type="button"><span class="en">Present</span><span class="ur">حاضر</span></button>
+    </div>
+    <div class="row"><button class="btn r w" id="fin" type="button" style="margin-top:4px"><span class="en">Class finished: rest ABSENT</span><span class="ur">کلاس ختم: باقی غیر حاضر</span></button></div>
+  </div>
+  <div class="card hide" id="listcard"><div class="list" id="list"></div></div>
+</div>
+
+<p class="foot"><span class="en">Camera not allowed or not working?</span><span class="ur">کیمرہ نہیں چل رہا؟</span>
+  <a href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=attend" target="_blank" rel="noopener nofollow"><span class="en">Open the old Teacher Attendance page</span><span class="ur">پرانا ٹیچر اٹینڈنس صفحہ کھولیں</span></a></p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var EXEC = 'https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec';
+  var JSQR = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js';
+  var QKEY = 'gnckAttQ1', IDLE_MIN = 30;
+  var U = '', P = '', INFO = null, FAC = '', ROWS = [], stream = null, track = null, det = null, scanning = false, busy = false, lastText = '', lastAt = 0, geo = null, geoWatch = null, idleT = null;
+  var root = document.documentElement;
+  function $(id) { return document.getElementById(id); }
+  function ur() { return root.getAttribute('lang') === 'ur'; }
+  function T(en, u) { return ur() ? u : en; }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function bil(en, u) { return '<span class="en">' + esc(en) + '</span><span class="ur">' + esc(u) + '</span>'; }
+  function errTxt(m) { m = String(m || '').replace(/^\[AUTH\]/, ''); var p = m.split('||'); return bil(p[0], p[1] || p[0]); }
+  $('langbtn').onclick = function () { var l = ur() ? 'en' : 'ur'; root.setAttribute('lang', l); root.setAttribute('dir', l === 'ur' ? 'rtl' : 'ltr'); try { localStorage.setItem('gnckLang', l); } catch (e) {} };
+  function show(n) { ['s1', 's2', 's3'].forEach(function (s) { $(s).classList.toggle('hide', s !== n); }); $('lo').classList.toggle('hide', n === 's1'); }
+
+  // ---------- server ----------
+  function api(op, body) {
+    var b = { op: op, user: U, pin: P };
+    Object.keys(body || {}).forEach(function (k) { b[k] = body[k]; });
+    var ctl = ('AbortController' in window) ? new AbortController() : null, t = setTimeout(function () { if (ctl) ctl.abort(); }, 25000);
+    return fetch(EXEC + '?action=attapi', { method: 'POST', body: JSON.stringify(b), signal: ctl ? ctl.signal : undefined, cache: 'no-store' })
+      .then(function (r) { clearTimeout(t); return r.json().catch(function () { throw new Error('Server reply not understood (Google code v21.4 needed). Tell the admin.||سرور کا جواب سمجھ نہیں آیا (گوگل کوڈ v21.4 چاہیے)۔ ایڈمن کو بتائیں۔'); }); }, function (e) { clearTimeout(t); var x = new Error('NET'); x.net = true; throw x; })
+      .then(function (j) {
+        if (!j || !j.ok) { var e = new Error((j && j.error) || 'Error'); if (/^\[AUTH\]/.test(e.message)) e.auth = true; throw e; }
+        return j.r;
+      });
+  }
+
+  // ---------- sounds ----------
+  var AC = null;
+  function beep(kind) {
+    try {
+      AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+      var seq = kind === 'ok' ? [[1040, .12]] : (kind === 'late' ? [[880, .1], [0, .05], [880, .1]] : (kind === 'al' ? [[660, .08], [0, .05], [660, .08]] : [[220, .35]]));
+      var t = AC.currentTime;
+      seq.forEach(function (s) {
+        if (s[0]) { var o = AC.createOscillator(), g = AC.createGain(); o.frequency.value = s[0]; o.type = kind === 'bad' ? 'square' : 'sine'; g.gain.setValueAtTime(.25, t); g.gain.exponentialRampToValueAtTime(.001, t + s[1]); o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t + s[1]); }
+        t += s[1];
+      });
+      if (navigator.vibrate) navigator.vibrate(kind === 'bad' ? [200, 80, 200] : 80);
+    } catch (e) {}
+  }
+
+  // ---------- login ----------
+  function login() {
+    var u = $('u').value.trim(), p = $('p').value;
+    if (!u || !p) { $('m1').innerHTML = bil('Write username and password.', 'یوزر نیم اور پاس ورڈ لکھیں۔'); return; }
+    $('lb').disabled = true; $('m1').innerHTML = bil('Please wait...', 'انتظار کریں...');
+    U = u; P = p;
+    try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {}
+    api('login').then(function (r) {
+      INFO = r; $('p').value = ''; $('m1').innerHTML = ''; $('lb').disabled = false;
+      $('info').innerHTML = bil(r.user + ' · ' + r.today + ' · LATE after ' + r.late, r.user + ' · ' + r.today + ' · ' + r.late + ' کے بعد لیٹ') +
+        (r.holiday ? '<br><b style="color:#c62828">' + bil('Holiday: ' + r.holiday, 'چھٹی: ' + r.holiday) + '</b>' : (!r.workday ? '<br><b style="color:#c62828">' + bil('Today is a weekend / off day.', 'آج ہفتہ وار چھٹی ہے۔') + '</b>' : ''));
+      $('facs').innerHTML = r.faculties.map(function (f) { return '<button class="btn" type="button" data-f="' + esc(f) + '"><span>' + esc(f) + '</span><span>&#8250;</span></button>'; }).join('');
+      if (r.locMode && r.locMode !== 'OFF') startGeo();
+      show('s2'); flushQueue(true); armIdle();
+    }).catch(function (e) {
+      $('lb').disabled = false; U = ''; P = '';
+      $('m1').innerHTML = e.net ? bil('No internet. Check the connection and try again.', 'انٹرنیٹ نہیں۔ کنکشن چیک کر کے دوبارہ کوشش کریں۔') : errTxt(e.message);
+    });
+  }
+  $('lb').onclick = login;
+  $('p').addEventListener('keydown', function (e) { if (e.key === 'Enter') login(); });
+  function logout(why) {
+    stopCam(); U = ''; P = ''; INFO = null; FAC = ''; ROWS = [];
+    if (geoWatch != null) { try { navigator.geolocation.clearWatch(geoWatch); } catch (e) {} geoWatch = null; }
+    show('s1'); $('m1').innerHTML = why || '';
+  }
+  $('lo').onclick = function () { logout(''); };
+  function armIdle() { clearTimeout(idleT); idleT = setTimeout(function () { if (P) logout(bil('Logged out (not used for ' + IDLE_MIN + ' minutes).', 'لاگ آؤٹ (' + IDLE_MIN + ' منٹ استعمال نہیں ہوا)۔')); }, IDLE_MIN * 60000); }
+  ['click', 'keydown', 'touchstart'].forEach(function (ev) { document.addEventListener(ev, function () { if (P) armIdle(); }, true); });
+
+  // ---------- location ----------
+  function startGeo() {
+    if (!navigator.geolocation || geoWatch != null) return;
+    try { geoWatch = navigator.geolocation.watchPosition(function (p) { geo = { lat: p.coords.latitude, lng: p.coords.longitude, acc: Math.round(p.coords.accuracy) }; }, function () {}, { enableHighAccuracy: true, maximumAge: 60000, timeout: 20000 }); } catch (e) {}
+  }
+
+  // ---------- class ----------
+  $('facs').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-f]'); if (!b) return;
+    FAC = b.getAttribute('data-f'); $('cls').textContent = FAC;
+    show('s3'); counts(null); loadList(); startCam();
+  });
+  $('chg').onclick = function () { stopCam(); FAC = ''; show('s2'); $('listcard').classList.add('hide'); };
+  function loadList() {
+    return api('list', { fac: FAC }).then(function (r) { ROWS = r.rows || []; counts(r); drawList(); }).catch(function (e) { if (e.auth) logout(errTxt(e.message)); });
+  }
+  function counts(r) {
+    var c = { P: 0, L: 0, A: 0, LV: 0, N: 0 };
+    if (r && r.cnt) c = r.cnt; else ROWS.forEach(function (x) { c[x.st || 'N'] = (c[x.st || 'N'] || 0) + 1; });
+    var L = [['P', 'Present', 'حاضر'], ['L', 'Late', 'لیٹ'], ['A', 'Absent', 'غیر حاضر'], ['LV', 'Leave', 'چھٹی'], ['N', 'Left', 'باقی']];
+    $('cnt').innerHTML = L.map(function (x) { return '<div><b>' + (c[x[0]] || 0) + '</b><span>' + bil(x[1], x[2]) + '</span></div>'; }).join('');
+  }
+  function setRow(roll, st, t) {
+    for (var i = 0; i < ROWS.length; i++) if (String(ROWS[i].roll) === String(roll)) { ROWS[i].st = st; ROWS[i].t = t || ROWS[i].t; ROWS[i].by = U; }
+    counts(null); if (!$('listcard').classList.contains('hide')) drawList();
+  }
+  function drawList() {
+    $('list').innerHTML = ROWS.map(function (x) {
+      return '<div class="lr"><span class="chip ' + esc(x.st) + '">' + esc(x.st || '-') + '</span><div class="n"><b>' + esc(x.name) + '</b><small>' + esc(x.roll) + (x.t ? ' · ' + esc(x.t) : '') + (x.lv ? ' · LEAVE' : '') + '</small></div>' +
+        ['P', 'L', 'A'].map(function (s) { return '<button class="mk" type="button" data-r="' + esc(x.roll) + '" data-s="' + s + '">' + s + '</button>'; }).join('') + '</div>';
+    }).join('') || '<p class="muted">' + bil('No students in this class list yet.', 'اس کلاس کی لسٹ میں ابھی کوئی طالب علم نہیں۔') + '</p>';
+  }
+  $('lst').onclick = function () { var c = $('listcard'); c.classList.toggle('hide'); if (!c.classList.contains('hide')) { drawList(); c.scrollIntoView({ behavior: 'smooth' }); } };
+  $('list').addEventListener('click', function (e) { var b = e.target.closest('[data-r]'); if (b) mark({ roll: b.getAttribute('data-r'), status: b.getAttribute('data-s') }); });
+  $('man').onclick = function () { $('manbox').classList.toggle('hide'); if (!$('manbox').classList.contains('hide')) $('mroll').focus(); };
+  $('mgo').onclick = function () { var r = $('mroll').value.replace(/\D/g, ''); if (!r) return; $('mroll').value = ''; mark({ roll: r }); };
+  $('mroll').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('mgo').click(); });
+  $('fin').onclick = function () {
+    var left = ROWS.filter(function (x) { return !x.st; }).length;
+    if (!confirm(T('Class finished? ' + left + ' student(s) not marked will be ABSENT (approved leave = LEAVE).', 'کلاس ختم؟ ' + left + ' طلبہ جن کی حاضری نہیں لگی غیر حاضر ہوں گے (منظور چھٹی = چھٹی)۔'))) return;
+    $('fin').disabled = true;
+    api('finish', { fac: FAC, d: geo || {} }).then(function (r) {
+      $('fin').disabled = false; stopCam();
+      result('al', T('DONE', 'مکمل'), T('Absent: ' + r.absent + ' · Leave: ' + r.leave + ' · Total: ' + r.total, 'غیر حاضر: ' + r.absent + ' · چھٹی: ' + r.leave + ' · کل: ' + r.total), '', '');
+      loadList();
+    }).catch(function (e) { $('fin').disabled = false; if (e.auth) logout(errTxt(e.message)); else result('bad', T('NOT SAVED', 'محفوظ نہیں ہوا'), e.net ? T('No internet.', 'انٹرنیٹ نہیں۔') : '', '', ''); });
+  };
+
+  // ---------- result card ----------
+  function result(cls, st, line1, line2, photo) {
+    $('res').className = 'res ' + cls;
+    $('res').innerHTML = (photo ? '<img src="' + esc(photo) + '" alt="">' : '') + '<div><div class="st">' + esc(st) + '</div><div class="nm">' + esc(line1) + '</div><div class="sm">' + esc(line2) + '</div></div>';
+  }
+  var MSG = { badid: ['NOT VALID', 'Not a valid ID card of our college.', 'درست نہیں', 'یہ ہمارے کالج کا درست آئی ڈی کارڈ نہیں۔'],
+    notfound: ['NOT FOUND', 'College Roll not found in this year\'s admissions.', 'نہیں ملا', 'یہ کالج رول اس سال کے داخلوں میں نہیں۔'],
+    cancelled: ['CANCELLED', 'Admission cancelled: do not mark.', 'منسوخ', 'داخلہ منسوخ: حاضری نہ لگائیں۔'],
+    otherClass: ['OTHER CLASS', 'This student is of: ', 'دوسری کلاس', 'یہ طالب علم اس کلاس کا ہے: '],
+    oldyear: ['OLD CARD', 'This card is of an old year.', 'پرانا کارڈ', 'یہ پرانے سال کا کارڈ ہے۔'],
+    far: ['NOT AT COLLEGE', 'Location: you are not at the college. Distance (m): ', 'کالج سے باہر', 'لوکیشن: آپ کالج میں نہیں ہیں۔ فاصلہ (میٹر): '],
+    noloc: ['LOCATION NEEDED', 'Allow location for attendance.', 'لوکیشن ضروری', 'حاضری کے لیے لوکیشن کی اجازت دیں۔'] };
+  function shown(r) {
+    if (!r.ok) {
+      var m = MSG[r.code] || ['ERROR', r.msg || r.code || '', 'غلطی', r.msg || r.code || ''];
+      var extra = r.code === 'otherClass' ? (r.faculty || '') : (r.code === 'far' ? String(r.dist || '') : '');
+      beep('bad'); result('bad', T(m[0], m[2]), (r.name ? r.name + ' · ' : '') + T(m[1], m[3]) + extra, r.roll ? 'College Roll ' + r.roll : '', '');
+      return;
+    }
+    var late = r.status === 'L', st = r.already ? T('ALREADY ' + (r.status === 'L' ? 'LATE' : 'PRESENT'), 'پہلے سے ' + (r.status === 'L' ? 'لیٹ' : 'حاضر')) :
+      ({ P: T('PRESENT', 'حاضر'), L: T('LATE', 'لیٹ'), A: T('ABSENT', 'غیر حاضر'), LV: T('LEAVE', 'چھٹی') }[r.status] || r.status);
+    beep(r.already ? 'al' : (late ? 'late' : (r.status === 'A' ? 'bad' : 'ok')));
+    result(r.already ? 'al' : (late ? 'late' : (r.status === 'A' ? 'bad' : 'ok')), st, r.name || '', 'College Roll ' + r.roll + ' · ' + (r.time || '') + (r.already && r.by ? ' · ' + r.by : '') + (r.locOk === false && INFO && INFO.locMode === 'CHECK' ? ' · ' + T('location far', 'لوکیشن دور') : ''), r.photo || '');
+    if (!r.already) setRow(r.roll, r.status, r.time);
+  }
+
+  // ---------- mark (online, else saved on the phone) ----------
+  function mark(d) {
+    if (!FAC) return;
+    d.faculty = FAC; if (geo) { d.lat = geo.lat; d.lng = geo.lng; d.acc = geo.acc; }
+    busy = true;
+    if (!d.text) result('al', T('SAVING...', 'محفوظ ہو رہا ہے...'), 'College Roll ' + d.roll, '', '');
+    return api('mark', { d: d }).then(function (r) { busy = false; shown(r); }).catch(function (e) {
+      busy = false;
+      if (e.auth) { logout(errTxt(e.message)); return; }
+      if (e.net) { d.at = Date.now(); queueAdd(d); beep('ok'); result('al', T('SAVED ON PHONE', 'فون میں محفوظ'), T('No internet: will be sent automatically.', 'انٹرنیٹ نہیں: خود بھیج دیا جائے گا۔'), d.roll ? 'College Roll ' + d.roll : '', ''); return; }
+      beep('bad'); result('bad', T('ERROR', 'غلطی'), String(e.message || '').split('||')[ur() ? 1 : 0] || '', '', '');
+    });
+  }
+  function queueGet() { try { var q = JSON.parse(localStorage.getItem(QKEY) || '{}'); return q && q.user === U ? q.items || [] : []; } catch (e) { return []; } }
+  function queueSet(items) { try { if (items.length) localStorage.setItem(QKEY, JSON.stringify({ user: U, items: items })); else localStorage.removeItem(QKEY); } catch (e) {} queueBar(); }
+  function queueAdd(d) { var q = queueGet(); if (q.length < 300) q.push(d); queueSet(q); }
+  function queueBar() { var n = queueGet().length; $('qbar').classList.toggle('hide', !n); $('qtxt').innerHTML = bil(n + ' mark(s) saved on this phone (no internet)', n + ' حاضریاں اس فون میں محفوظ (انٹرنیٹ نہیں)'); }
+  function flushQueue(quiet) {
+    var q = queueGet(); queueBar(); if (!q.length || !P) return;
+    api('sync', { items: q }).then(function (out) {
+      queueSet([]);
+      var ok = (out || []).filter(function (x) { return x && x.ok; }).length;
+      if (!quiet || ok) result('ok', T('SENT', 'بھیج دیا'), T(ok + ' of ' + q.length + ' marks saved.', q.length + ' میں سے ' + ok + ' حاضریاں محفوظ۔'), '', '');
+      if (FAC) loadList();
+    }).catch(function () {});
+  }
+  $('sync').onclick = function () { flushQueue(false); };
+  window.addEventListener('online', function () { flushQueue(true); });
+
+  // ---------- camera + QR ----------
+  var cv = document.createElement('canvas'), cx = cv.getContext('2d', { willReadFrequently: true }), jsqrP = null;
+  function loadJsQr() {
+    if (window.jsQR) return Promise.resolve();
+    if (jsqrP) return jsqrP;
+    jsqrP = new Promise(function (ok, bad) { var s = document.createElement('script'); s.src = JSQR; s.onload = ok; s.onerror = bad; document.head.appendChild(s); });
+    return jsqrP;
+  }
+  function camMsg(html, btn) { $('camoff').classList.toggle('hide', !html); $('camtxt').innerHTML = html || ''; $('camgo').classList.toggle('hide', !btn); $('fr').classList.toggle('hide', !!html); }
+  function startCam() {
+    if (stream) return;
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { camMsg(bil('This browser cannot open the camera. Use Chrome.', 'یہ براؤزر کیمرہ نہیں کھول سکتا۔ کروم استعمال کریں۔'), false); return; }
+    camMsg('', false); $('pill').textContent = T('Camera starting...', 'کیمرہ کھل رہا ہے...');
+    var useDet = false;
+    try { useDet = 'BarcodeDetector' in window; } catch (e) {}
+    var prep = useDet ? BarcodeDetector.getSupportedFormats().then(function (f) { if (f.indexOf('qr_code') >= 0) det = new BarcodeDetector({ formats: ['qr_code'] }); else return loadJsQr(); }).catch(function () { return loadJsQr(); }) : loadJsQr();
+    navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } } }).then(function (s) {
+      stream = s; track = s.getVideoTracks()[0];
+      var v = $('v'); v.srcObject = s; v.play().catch(function () {});
+      try {
+        var cap = track.getCapabilities ? track.getCapabilities() : {};
+        if (cap.focusMode && cap.focusMode.indexOf('continuous') >= 0) track.applyConstraints({ advanced: [{ focusMode: 'continuous' }] }).catch(function () {});
+        $('torch').classList.toggle('hide', !cap.torch);
+      } catch (e) {}
+      return prep.then(function () { scanning = true; $('pill').textContent = T('Scanning', 'اسکین جاری') + ' ●'; loop(); });
+    }).catch(function (e) {
+      stopCam();
+      var denied = e && (e.name === 'NotAllowedError' || e.name === 'SecurityError');
+      camMsg(denied ? bil('Camera permission is blocked. Allow the camera for this website (lock icon > Permissions), then press Start camera.', 'کیمرے کی اجازت بند ہے۔ اس ویب سائٹ کو کیمرے کی اجازت دیں (تالے کا نشان > Permissions)، پھر کیمرہ چلائیں دبائیں۔') :
+        bil('Camera did not open.', 'کیمرہ نہیں کھلا۔'), true);
+    });
+  }
+  function stopCam() {
+    scanning = false;
+    if (stream) { stream.getTracks().forEach(function (t) { try { t.stop(); } catch (e) {} }); }
+    stream = null; track = null; $('torch').classList.add('hide'); $('pill').textContent = '';
+  }
+  $('camgo').onclick = startCam;
+  var torchOn = false;
+  $('torch').onclick = function () { if (!track) return; torchOn = !torchOn; track.applyConstraints({ advanced: [{ torch: torchOn }] }).catch(function () {}); };
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stopCam(); else if (FAC && P && !$('s3').classList.contains('hide')) startCam(); });
+  var lastTry = 0, flip = 0;
+  function loop() {
+    if (!scanning) return;
+    requestAnimationFrame(loop);
+    var now = Date.now(), v = $('v');
+    if (busy || now - lastTry < 140 || v.readyState < 2 || !v.videoWidth) return;
+    lastTry = now;
+    if (det) {
+      busy = true;
+      det.detect(v).then(function (codes) { busy = false; if (codes && codes.length) got(codes[0].rawValue); }).catch(function () { busy = false; });
+      return;
+    }
+    if (!window.jsQR) return;
+    // what the teacher sees (video is cropped by object-fit: cover) and, every 2nd try, the whole frame
+    var w = v.videoWidth, h = v.videoHeight, bw = v.clientWidth || w, bh = v.clientHeight || h, sc = Math.max(bw / w, bh / h);
+    var vw = Math.min(w, bw / sc), vh = Math.min(h, bh / sc), sx, sy, sw, sh;
+    flip = (flip + 1) % 4;
+    if (flip % 2) { sw = vw; sh = vh; sx = (w - vw) / 2; sy = (h - vh) / 2; } else { sw = w; sh = h; sx = 0; sy = 0; }
+    var k = Math.min(1.4, 720 / Math.max(sw, sh)), W = Math.round(sw * k), H = Math.round(sh * k);
+    cv.width = W; cv.height = H;
+    cx.drawImage(v, sx, sy, sw, sh, 0, 0, W, H);
+    var img = cx.getImageData(0, 0, W, H);
+    var code = jsQR(img.data, W, H, { inversionAttempts: flip === 3 ? 'attemptBoth' : 'dontInvert' });
+    if (code && code.data) got(code.data);
+  }
+  function got(text) {
+    text = String(text || '').trim(); if (!text) return;
+    var now = Date.now();
+    if (text === lastText && now - lastAt < 4000) return;
+    lastText = text; lastAt = now;
+    if (!/[?&](id|roll)=/i.test(text)) { beep('bad'); result('bad', T('NOT AN ID CARD', 'آئی ڈی کارڈ نہیں'), T('This QR is not our college ID card or slip.', 'یہ کیو آر ہمارے کالج کا آئی ڈی کارڈ یا سلپ نہیں۔'), '', ''); return; }
+    result('al', T('CHECKING...', 'جانچ ہو رہی ہے...'), '', '', '');
+    mark({ text: text });
+  }
+  queueBar();
+})();
+</script>
+</body>
+</html>
