@@ -27,6 +27,21 @@
 <!-- Google Analytics (GA4, WEB10) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HG7CFTSNR5"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HG7CFTSNR5');</script>
+<style>
+.vg{margin:18px 0 20px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.22);border-radius:16px;padding:16px}
+.vg h2{margin:0 0 4px;font-size:1.25rem;color:var(--gold-soft)}
+.vg-sub{margin:0 0 12px;font-size:.95rem;opacity:.9}
+.vg-grid{display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1fr);gap:14px;align-items:start}
+.vg-item{margin:0}
+.vg-item video{width:100%;display:block;border-radius:12px;background:#000;aspect-ratio:16/9;object-fit:contain}
+.vg-item.tall video{aspect-ratio:9/16;max-height:70vh}
+.vg-item figcaption{margin-top:6px;font-size:.92rem;line-height:1.4}
+@media (max-width:640px){.vg-grid{grid-template-columns:1fr}.vg-item.tall video{max-height:80vh}}
+.vg-ask{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.vg-ask[hidden]{display:none}
+.vg-box{background:var(--card);color:var(--fg);border-radius:16px;padding:22px;max-width:420px;width:100%}
+.vg-box h3{margin:0 0 6px;font-size:1.2rem}.vg-box p{margin:0 0 14px;color:var(--muted)}
+</style>
 </head>
 <body>
 <header class="top">
@@ -42,7 +57,22 @@
     <nav class="crumb" aria-label="Breadcrumb"><a href="/"><span class="en">GNCK Admission</span><span class="ur" data-nosnippet>جی این سی کے ایڈمیشن</span></a> <span aria-hidden="true">›</span> <span class="en">XI Admission</span><span class="ur" data-nosnippet>گیارہویں داخلہ</span></nav>
     <h1><span class="en">National College XI Admission 2026-27 (First Year)</span><span class="ur" data-nosnippet>نیشنل کالج گیارہویں (XI) داخلہ 2026-27 (فرسٹ ایئر)</span></h1>
     <p class="lede"><span class="en">Online XI admission form for Govt. National College (Morning), Karachi (GNCK). The form is open from <b>1 November</b> to <b>31 December 2026</b>. Admission is completely free.</span><span class="ur" data-nosnippet>گورنمنٹ نیشنل کالج (مارننگ)، کراچی (جی این سی کے) کا آن لائن گیارہویں داخلہ فارم۔ فارم <b>1 نومبر</b> سے <b>31 دسمبر 2026</b> تک کھلا ہے۔ داخلہ بالکل مفت ہے۔</span></p>
-    <div class="cta"><a class="btn pri" href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=apply" target="_blank" rel="noopener"><span class="en">Fill XI Admission Form</span><span class="ur" data-nosnippet>گیارہویں داخلہ فارم بھریں</span></a><a class="btn ghost" href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec" target="_blank" rel="noopener"><span class="en">Check Status &amp; Slip</span><span class="ur" data-nosnippet>صورتحال اور سلپ</span></a></div>
+    <section class="vg" id="video-guide" aria-labelledby="vg-h">
+      <h2 id="vg-h"><span class="en">&#9654; Watch first: Video Guide</span><span class="ur" data-nosnippet>&#9654; پہلے ویڈیو گائیڈ دیکھیں</span></h2>
+      <p class="vg-sub"><span class="en">Watch both short videos before you fill the form.</span><span class="ur" data-nosnippet>فارم بھرنے سے پہلے دونوں مختصر ویڈیوز دیکھیں۔</span></p>
+      <div class="vg-grid">
+        <figure class="vg-item tall"><video id="vg1" controls playsinline preload="none" poster="/videos/xi-guide-part1.jpg"><source src="/videos/xi-guide-part1.mp4" type="video/mp4"></video>
+          <figcaption><b><span class="en">Part 1: How to fill the online form</span><span class="ur" data-nosnippet>حصہ 1: آن لائن فارم کیسے بھریں</span></b></figcaption></figure>
+        <figure class="vg-item"><video id="vg2" controls playsinline preload="none" poster="/videos/xi-guide-part2.jpg"><source src="/videos/xi-guide-part2.mp4" type="video/mp4"></video>
+          <figcaption><b><span class="en">Part 2: Visit the college, then download your slip and ID card</span><span class="ur" data-nosnippet>حصہ 2: کالج آئیں، پھر سلپ اور آئی ڈی کارڈ ڈاؤن لوڈ کریں</span></b></figcaption></figure>
+      </div>
+    </section>
+    <div class="vg-ask" id="vgAsk" role="dialog" aria-modal="true" aria-labelledby="vgAskH" hidden><div class="vg-box">
+      <h3 id="vgAskH"><span class="en">Watch the video guide first?</span><span class="ur" data-nosnippet>پہلے ویڈیو گائیڈ دیکھیں؟</span></h3>
+      <p><span class="en">It takes about 2 minutes and helps you fill the form without mistakes.</span><span class="ur" data-nosnippet>صرف تقریباً 2 منٹ، اور فارم بغیر غلطی کے بھرنے میں مدد ملے گی۔</span></p>
+      <div class="cta"><button type="button" class="btn pri" id="vgWatch"><span class="en">Watch video</span><span class="ur" data-nosnippet>ویڈیو دیکھیں</span></button><a class="btn out" id="vgGo" href="#" target="_blank" rel="noopener"><span class="en">Go to the form</span><span class="ur" data-nosnippet>فارم پر جائیں</span></a></div>
+    </div></div>
+    <div class="cta"><a class="btn pri" id="applyBtn" href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=apply" target="_blank" rel="noopener"><span class="en">Fill XI Admission Form</span><span class="ur" data-nosnippet>گیارہویں داخلہ فارم بھریں</span></a><a class="btn ghost" href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec" target="_blank" rel="noopener"><span class="en">Check Status &amp; Slip</span><span class="ur" data-nosnippet>صورتحال اور سلپ</span></a></div>
     <p class="free"><span class="en"><b>Free:</b> admission and enrollment cost nothing. Never pay anyone.</span><span class="ur" data-nosnippet><b>مفت:</b> داخلہ اور اینرولمنٹ کی کوئی فیس نہیں۔ کسی کو پیسے نہ دیں۔</span></p>
   </div>
 </div>
@@ -69,6 +99,22 @@
   });
   document.querySelectorAll('a.soon').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
   if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('/sw.js').catch(function () {}); }); }
+})();
+</script>
+<script>
+(function(){
+  var K='gnckVidSeen', seen=false;
+  try{ seen = localStorage.getItem(K)==='1'; }catch(e){}
+  function mark(){ seen=true; try{ localStorage.setItem(K,'1'); }catch(e){} }
+  ['vg1','vg2'].forEach(function(id){ var v=document.getElementById(id); if(v) v.addEventListener('play', mark); });
+  var btn=document.getElementById('applyBtn'), ask=document.getElementById('vgAsk'), go=document.getElementById('vgGo'), w=document.getElementById('vgWatch');
+  if(!btn||!ask) return;
+  go.href=btn.href;
+  btn.addEventListener('click', function(ev){ if(seen) return; ev.preventDefault(); ask.hidden=false; w.focus(); });
+  go.addEventListener('click', function(){ mark(); ask.hidden=true; });
+  w.addEventListener('click', function(){ ask.hidden=true; var g=document.getElementById('video-guide'); if(g) g.scrollIntoView({behavior:'smooth',block:'start'}); var v=document.getElementById('vg1'); if(v){ try{ v.play(); }catch(e){} } });
+  ask.addEventListener('click', function(ev){ if(ev.target===ask) ask.hidden=true; });
+  document.addEventListener('keydown', function(ev){ if(ev.key==='Escape') ask.hidden=true; });
 })();
 </script>
 <script src="/notice.js" defer></script>
