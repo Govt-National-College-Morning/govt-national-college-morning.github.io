@@ -1,4 +1,4 @@
-/* GNCK website v2.2 - settings (v2.2: ?preview=, Seats full) from the Control Panel (XI Code v21.4, WEB13).
+/* GNCK website v2.5 - settings (v2.2: ?preview=, Seats full; v2.5: Video Guide switch + YouTube, SECCAP slip link) from the Control Panel (XI Code v21.4+, WEB13; v22.0 P65 / P66).
    Reads <exec>?action=settings (public JSON: no passwords, no keys) and puts the
    admin's choices on the page: admission status + dates, buttons, sections,
    cut-off, FAQ, principal, contacts, links, office timings, email, maintenance.
@@ -12,6 +12,8 @@
   function txt(el, v) { if (el && v) el.textContent = v; }
   function safeUrl(u) { return /^https:\/\/[^\s"'<>]+$/.test(String(u || '')) ? u : ''; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function ytId(u) { var m = String(u || '').match(/^https:\/\/(?:www\.|m\.)?(?:youtube\.com\/(?:watch\?(?:[^#]*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/); return m ? m[1] : ''; }
+  var HOME = !!document.getElementById('services');   // home page only: headline / FREE text
   function bil(en, ur) { return '<span class="en">' + esc(en) + '</span><span class="ur" data-nosnippet>' + esc(ur || en) + '</span>'; }
 
   // which link is which button
@@ -67,8 +69,8 @@
     // 4) sections
     Object.keys(SEC).forEach(function (k) { if (s.sec && s.sec[k] !== undefined) $$(SEC[k]).forEach(function (el) { hide(el, s.sec[k] === false); }); });
     // 5) texts
-    if (s.head && (s.head.en || s.head.ur)) { var h1 = $('.hero h1') || $('h1'); if (h1) { txt($('.en', h1), s.head.en); txt($('.ur', h1), s.head.ur || s.head.en); } }
-    if (s.free && (s.free.en || s.free.ur)) { var fp = $('.free p'); if (fp) { txt($(':scope > .en', fp), s.free.en ? s.free.en + ' ' : ''); txt($(':scope > .ur', fp), s.free.ur ? s.free.ur + ' ' : ''); } }
+    if (HOME && s.head && (s.head.en || s.head.ur)) { var h1 = $('.hero h1') || $('h1'); if (h1) { txt($('.en', h1), s.head.en); txt($('.ur', h1), s.head.ur || s.head.en); } }
+    if (HOME && s.free && (s.free.en || s.free.ur)) { var fp = $('.free p'); if (fp) { txt($(':scope > .en', fp), s.free.en ? s.free.en + ' ' : ''); txt($(':scope > .ur', fp), s.free.ur ? s.free.ur + ' ' : ''); } }
     if (s.email) $$('.mail').forEach(function (m) { m.textContent = s.email; });
     if (s.xii) {
       var xe = $('#xiinote');
@@ -106,6 +108,20 @@
         else if (/^پرنسپل: /.test(x.textContent)) x.textContent = 'پرنسپل: ' + (pr.ur || pr.en);
       });
     }
+    // 11) v2.5: XI Video Guide ON / OFF (P66) + YouTube link for Part 2; SECCAP slip link (WEB16, hidden when OFF)
+    var vOff = !!(s.sec && s.sec.video === false);
+    document.documentElement.classList.toggle('novg', vOff);
+    $$('.vgbtn, #video-guide').forEach(function (el) { hide(el, vOff); });
+    var yt = ytId(s.video && s.video.yt), v2 = document.getElementById('vg2');
+    if (yt && v2) {
+      var fr = document.createElement('iframe'); fr.id = 'vg2yt'; fr.src = 'https://www.youtube-nocookie.com/embed/' + yt + '?rel=0';
+      fr.title = 'XI admission video guide, part 2'; fr.loading = 'lazy'; fr.allowFullscreen = true; fr.referrerPolicy = 'strict-origin-when-cross-origin';
+      fr.setAttribute('allow', 'accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen');
+      fr.style.cssText = 'width:100%;aspect-ratio:16/9;border:0;border-radius:12px;display:block;background:#000';
+      v2.parentNode.replaceChild(fr, v2);
+    }
+    var sl = safeUrl(s.seccapSlip);
+    $$('[data-sslip]').forEach(function (a) { if (sl) a.href = sl; hide(a, !sl); });
     // 10) contacts (Phone card) + developer photo / WhatsApp
     var cs = Array.isArray(s.contacts) ? s.contacts : null, card = null;
     $$('#contact .card.ci').forEach(function (c) { if ($('.person', c)) card = c; });

@@ -128,7 +128,7 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
   'use strict';
   var EXEC = 'https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec';
   var JSQR = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js';
-  var QKEY = 'gnckAttQ1', IDLE_MIN = 30;
+  var QKEY = 'gnckAttQ1', TKEY = 'gnckScanTok', IDLE_MIN = 30;   // v2.5 WEB15: login token (Google v22: Control Panel decides how long)
   var U = '', P = '', INFO = null, FAC = '', ROWS = [], stream = null, track = null, det = null, scanning = false, busy = false, lastText = '', lastAt = 0, geo = null, geoWatch = null, idleT = null;
   var root = document.documentElement;
   function $(id) { return document.getElementById(id); }
@@ -142,7 +142,7 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
 
   // ---------- server ----------
   function api(op, body) {
-    var b = { op: op, user: U, pin: P };
+    var b = { op: op, user: U, pin: P, ua: String(navigator.userAgent || '').slice(0, 60) };
     Object.keys(body || {}).forEach(function (k) { b[k] = body[k]; });
     var ctl = ('AbortController' in window) ? new AbortController() : null, t = setTimeout(function () { if (ctl) ctl.abort(); }, 25000);
     return fetch(EXEC + '?action=attapi', { method: 'POST', body: JSON.stringify(b), signal: ctl ? ctl.signal : undefined, cache: 'no-store' })
@@ -175,27 +175,43 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
     $('lb').disabled = true; $('m1').innerHTML = bil('Please wait...', 'انتظار کریں...');
     U = u; P = p;
     try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {}
-    api('login').then(function (r) {
+    api('login').then(enter).catch(function (e) {
+      $('lb').disabled = false; U = ''; P = '';
+      $('m1').innerHTML = e.net ? bil('No internet. Check the connection and try again.', 'انٹرنیٹ نہیں۔ کنکشن چیک کر کے دوبارہ کوشش کریں۔') : errTxt(e.message);
+    });
+  }
+  function tkPut(o) { try { if (o) localStorage.setItem(TKEY, JSON.stringify(o)); else localStorage.removeItem(TKEY); } catch (e) {} }
+  function enter(r) {
+      if (r.tok) { P = 'T:' + r.tok; tkPut({ u: U, t: r.tok }); }
+      if (r.cfg && r.cfg.idle != null) IDLE_MIN = parseInt(r.cfg.idle, 10) || 0;
       INFO = r; $('p').value = ''; $('m1').innerHTML = ''; $('lb').disabled = false;
       $('info').innerHTML = bil(r.user + ' · ' + r.today + ' · LATE after ' + r.late, r.user + ' · ' + r.today + ' · ' + r.late + ' کے بعد لیٹ') +
         (r.holiday ? '<br><b style="color:#c62828">' + bil('Holiday: ' + r.holiday, 'چھٹی: ' + r.holiday) + '</b>' : (!r.workday ? '<br><b style="color:#c62828">' + bil('Today is a weekend / off day.', 'آج ہفتہ وار چھٹی ہے۔') + '</b>' : ''));
       $('facs').innerHTML = r.faculties.map(function (f) { return '<button class="btn" type="button" data-f="' + esc(f) + '"><span>' + esc(f) + '</span><span>&#8250;</span></button>'; }).join('');
       if (r.locMode && r.locMode !== 'OFF') startGeo();
       show('s2'); flushQueue(true); armIdle();
-    }).catch(function (e) {
-      $('lb').disabled = false; U = ''; P = '';
-      $('m1').innerHTML = e.net ? bil('No internet. Check the connection and try again.', 'انٹرنیٹ نہیں۔ کنکشن چیک کر کے دوبارہ کوشش کریں۔') : errTxt(e.message);
-    });
   }
+  // v2.5: login kept on this phone (token only, never the password)
+  (function () {
+    var o = null; try { o = JSON.parse(localStorage.getItem(TKEY) || 'null'); } catch (e) {}
+    if (!o || !o.u || !o.t) return;
+    U = o.u; P = 'T:' + o.t; $('m1').innerHTML = bil('Please wait...', 'انتظار کریں...');
+    api('login').then(function (r) { r.tok = ''; enter(r); }).catch(function (e) {
+      if (e.net) { $('m1').innerHTML = bil('No internet. Check the connection and try again.', 'انٹرنیٹ نہیں۔ کنکشن چیک کر کے دوبارہ کوشش کریں۔'); U = ''; P = ''; return; }
+      tkPut(null); U = ''; P = ''; $('m1').innerHTML = errTxt(e.message);
+    });
+  })();
   $('lb').onclick = login;
   $('p').addEventListener('keydown', function (e) { if (e.key === 'Enter') login(); });
   function logout(why) {
+    if (/^T:/.test(P)) { try { api('logout').catch(function () {}); } catch (e) {} }
+    tkPut(null);
     stopCam(); U = ''; P = ''; INFO = null; FAC = ''; ROWS = [];
     if (geoWatch != null) { try { navigator.geolocation.clearWatch(geoWatch); } catch (e) {} geoWatch = null; }
     show('s1'); $('m1').innerHTML = why || '';
   }
   $('lo').onclick = function () { logout(''); };
-  function armIdle() { clearTimeout(idleT); idleT = setTimeout(function () { if (P) logout(bil('Logged out (not used for ' + IDLE_MIN + ' minutes).', 'لاگ آؤٹ (' + IDLE_MIN + ' منٹ استعمال نہیں ہوا)۔')); }, IDLE_MIN * 60000); }
+  function armIdle() { clearTimeout(idleT); if (!(IDLE_MIN > 0)) return; idleT = setTimeout(function () { if (P) logout(bil('Logged out (not used for ' + IDLE_MIN + ' minutes).', 'لاگ آؤٹ (' + IDLE_MIN + ' منٹ استعمال نہیں ہوا)۔')); }, IDLE_MIN * 60000); }
   ['click', 'keydown', 'touchstart'].forEach(function (ev) { document.addEventListener(ev, function () { if (P) armIdle(); }, true); });
 
   // ---------- location ----------
@@ -257,7 +273,9 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
     otherClass: ['OTHER CLASS', 'This student is of: ', 'دوسری کلاس', 'یہ طالب علم اس کلاس کا ہے: '],
     oldyear: ['OLD CARD', 'This card is of an old year.', 'پرانا کارڈ', 'یہ پرانے سال کا کارڈ ہے۔'],
     far: ['NOT AT COLLEGE', 'Location: you are not at the college. Distance (m): ', 'کالج سے باہر', 'لوکیشن: آپ کالج میں نہیں ہیں۔ فاصلہ (میٹر): '],
-    noloc: ['LOCATION NEEDED', 'Allow location for attendance.', 'لوکیشن ضروری', 'حاضری کے لیے لوکیشن کی اجازت دیں۔'] };
+    noloc: ['LOCATION NEEDED', 'Allow location for attendance.', 'لوکیشن ضروری', 'حاضری کے لیے لوکیشن کی اجازت دیں۔'],
+    oldcard: ['OLD CARD', 'Old card: a new card was issued. Do not mark.', 'پرانا کارڈ', 'پرانا کارڈ: نیا کارڈ جاری ہو چکا۔ حاضری نہ لگائیں۔'],
+    suspended: ['SUSPENDED', 'Card suspended: do not mark. Send the student to the office.', 'معطل', 'کارڈ معطل: حاضری نہ لگائیں۔ طالب علم کو آفس بھیجیں۔'] };
   function shown(r) {
     if (!r.ok) {
       var m = MSG[r.code] || ['ERROR', r.msg || r.code || '', 'غلطی', r.msg || r.code || ''];
