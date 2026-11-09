@@ -364,6 +364,12 @@ html[dir="rtl"] .pglink a { unicode-bidi: plaintext; }
 .credit { text-align: end; }
 @media (max-width: 600px) { .credit { text-align: start; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .tile, .bar i { transition: none; } .free, .free::after, .free .stamp { animation: none; } .tile:hover, .btn.pri:hover { transform: none; } }
+.vg-ask{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:80}
+.vg-ask[hidden]{display:none}
+.vg-box{background:var(--card,#fff);color:var(--fg,#142019);border-radius:16px;padding:22px;max-width:420px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.vg-box h3{margin:0 0 6px;font-size:1.2rem}.vg-box p{margin:0 0 14px;opacity:.8}
+.vg-box .cta{display:flex;flex-wrap:wrap;gap:10px}
+.vg-box .btn.out{color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
 </style>
 <!-- Google Analytics (GA4, WEB10) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HG7CFTSNR5"></script>
@@ -413,6 +419,7 @@ html[dir="rtl"] .pglink a { unicode-bidi: plaintext; }
       <div class="cta">
         <a class="btn pri" href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=apply" target="_blank" rel="noopener"><span class="en">Apply Online</span><span class="ur" data-nosnippet>آن لائن فارم بھریں</span></a>
         <a class="btn ghost" href="https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec" target="_blank" rel="noopener"><span class="en">Check Status &amp; Slip</span><span class="ur" data-nosnippet>صورتحال اور سلپ دیکھیں</span></a>
+        <a class="btn ghost vgbtn" href="/xi-admission/#video-guide"><span class="en">&#9654; Video Guide</span><span class="ur" data-nosnippet>&#9654; ویڈیو گائیڈ</span></a>
       </div>
     </div>
     <aside class="status" aria-live="polite">
@@ -939,5 +946,26 @@ html[dir="rtl"] .pglink a { unicode-bidi: plaintext; }
 <script src="/notice.js" defer></script>
 <script src="/settings.js" defer></script>
 <script data-goatcounter="https://gnck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<div class="vg-ask" id="vgAsk" role="dialog" aria-modal="true" aria-labelledby="vgAskH" hidden><div class="vg-box">
+  <h3 id="vgAskH"><span class="en">Watch the video guide first?</span><span class="ur" data-nosnippet>پہلے ویڈیو گائیڈ دیکھیں؟</span></h3>
+  <p><span class="en">It takes about 2 minutes and helps you fill the form without mistakes.</span><span class="ur" data-nosnippet>صرف تقریباً 2 منٹ، اور فارم بغیر غلطی کے بھرنے میں مدد ملے گی۔</span></p>
+  <div class="cta"><a class="btn pri" href="/xi-admission/#video-guide"><span class="en">Watch video</span><span class="ur" data-nosnippet>ویڈیو دیکھیں</span></a><a class="btn out" id="vgGo" href="#" target="_blank" rel="noopener"><span class="en">Go to the form</span><span class="ur" data-nosnippet>فارم پر جائیں</span></a></div>
+</div></div>
+<script>
+(function(){
+  var K='gnckVidSeen', ask=document.getElementById('vgAsk'), go=document.getElementById('vgGo');
+  function seen(){ try{ return localStorage.getItem(K)==='1'; }catch(e){ return false; } }
+  function mark(){ try{ localStorage.setItem(K,'1'); }catch(e){} }
+  if(!ask) return;
+  document.addEventListener('click', function(ev){
+    var a = ev.target.closest && ev.target.closest('a[href*="action=apply"]');
+    if(!a || a===go || seen()) return;
+    ev.preventDefault(); go.href=a.href; ask.hidden=false;
+  });
+  go.addEventListener('click', function(){ mark(); ask.hidden=true; });
+  ask.addEventListener('click', function(ev){ if(ev.target===ask) ask.hidden=true; });
+  document.addEventListener('keydown', function(ev){ if(ev.key==='Escape') ask.hidden=true; });
+})();
+</script>
 </body>
 </html>
