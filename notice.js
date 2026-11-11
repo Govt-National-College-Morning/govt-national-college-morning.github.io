@@ -61,7 +61,7 @@
   function run() {
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
     var full = document.getElementById('nlist');
-    Promise.all([getJson(SHEET), getJson(LIST), getJson(SETT)]).then(function (res) {
+    Promise.all([getJson(SHEET), getJson(LIST), window.GNCK_SETTINGS_P || getJson(SETT)]).then(function (res) {
       var sheet = (res[0] && res[0].notices) || [], files = (res[1] && res[1].items) || [], t = today();
       // v2.6 WEB20: files from the Control Panel (Drive links only). On the yellow bar for 7 days (or until "till").
       ((res[2] && res[2].noticeFiles) || []).forEach(function (f) {

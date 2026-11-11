@@ -162,7 +162,10 @@
   if (window.GNCK) GNCK.onRender = function () { if (last) try { apply(last); } catch (e) {} };
   var ctl = ('AbortController' in window) ? new AbortController() : null;
   var tm = setTimeout(function () { if (ctl) ctl.abort(); }, 9000);
-  fetch(EXEC + '?action=settings' + (pv ? '&preview=' + pv : ''), { cache: 'no-store', signal: ctl ? ctl.signal : undefined }).then(function (r) { return r.json(); }).then(function (s) {
+  // v2.6: notice.js reuses this answer (one request to Google per page, not two)
+  var req = fetch(EXEC + '?action=settings' + (pv ? '&preview=' + pv : ''), { cache: 'no-store', signal: ctl ? ctl.signal : undefined }).then(function (r) { return r.json(); });
+  window.GNCK_SETTINGS_P = req.then(function (s) { return s && s.ok ? s : null; }, function () { return null; });
+  req.then(function (s) {
     clearTimeout(tm);
     if (!s || !s.ok) { if (pv) pvBar(bil('Preview expired (15 minutes). Make a new one from the Control Panel.', 'پیش نظارہ ختم ہو گیا۔ کنٹرول پینل سے دوبارہ بنائیں۔')); return; }
     last = s;
