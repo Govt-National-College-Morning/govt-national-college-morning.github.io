@@ -1,4 +1,4 @@
-/* GNCK website v2.5 - settings (v2.2: ?preview=, Seats full; v2.5: Video Guide switch + YouTube, SECCAP slip link) from the Control Panel (XI Code v21.4+, WEB13; v22.0 P65 / P66).
+/* GNCK website v2.6 - settings (v2.2: ?preview=, Seats full; v2.5: Video Guide switch + YouTube, SECCAP slip link) from the Control Panel (XI Code v21.4+, WEB13; v22.0 P65 / P66).
    Reads <exec>?action=settings (public JSON: no passwords, no keys) and puts the
    admin's choices on the page: admission status + dates, buttons, sections,
    cut-off, FAQ, principal, contacts, links, office timings, email, maintenance.

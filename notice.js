@@ -1,10 +1,13 @@
-/* GNCK notice board (website v1.9, WEB1).
+/* GNCK notice board (website v1.9, WEB1; v2.6 WEB20: Control Panel notice files).
    1) Text notices: Google Sheet tab "Notice" (CHALU, column E = ALL or WEBSITE) via ?action=notice.
    2) PDF notices: /notices/list.json (Claude adds the file + one line).
+   3) v2.6: PDF / picture notices uploaded in the Control Panel (6 Notice): ?action=settings -> noticeFiles[].
    Shows a yellow bar under the header on every page, and the full list on /notices/. */
 (function () {
   var SHEET = 'https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec?action=notice';
   var LIST = '/notices/list.json';
+  var SETT = SHEET.replace('?action=notice', '?action=settings');
+  function drive(u) { return /^https:\/\/drive\.google\.com\/[^\s"'<>]+$/.test(String(u || '')) ? u : ''; }
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -58,8 +61,15 @@
   function run() {
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
     var full = document.getElementById('nlist');
-    Promise.all([getJson(SHEET), getJson(LIST)]).then(function (res) {
+    Promise.all([getJson(SHEET), getJson(LIST), getJson(SETT)]).then(function (res) {
       var sheet = (res[0] && res[0].notices) || [], files = (res[1] && res[1].items) || [], t = today();
+      // v2.6 WEB20: files from the Control Panel (Drive links only). On the yellow bar for 7 days (or until "till").
+      ((res[2] && res[2].noticeFiles) || []).forEach(function (f) {
+        var u = drive(f && f.url); if (!u || !(f.en || f.ur)) return;
+        var d = /^\d{4}-\d{2}-\d{2}$/.test(f.date || '') ? f.date : t, bu = new Date(d + 'T00:00:00Z'); bu.setUTCDate(bu.getUTCDate() + 7);
+        var until = bu.toISOString().slice(0, 10); if (f.till && f.till < until) until = f.till;
+        files.push({ file: u, title_en: f.en || f.ur, title_ur: f.ur || f.en, date: d, bar_until: until, view: 1 });
+      });
       files = files.filter(function (f) { return f && f.file && f.title_en; })
                    .sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
 
@@ -73,7 +83,7 @@
         if (f.bar_until && f.bar_until >= t) {
           bar.push('<div class="ni"><i aria-hidden="true">&#128196;</i><span class="tx">' +
             B(esc(f.title_en), esc(f.title_ur || f.title_en)) +
-            '<a class="nfile" href="' + esc(f.file) + '" target="_blank" rel="noopener">' + B('PDF', 'پی ڈی ایف') + '</a></span></div>');
+            '<a class="nfile" href="' + esc(f.file) + '" target="_blank" rel="noopener">' + (f.view ? B('View', 'دیکھیں') : B('PDF', 'پی ڈی ایف')) + '</a></span></div>');
         }
       });
       var header = document.querySelector('header.top');
@@ -98,7 +108,7 @@
             B(esc(f.title_en), esc(f.title_ur || f.title_en)) + '</b>' +
             (isNew ? '<span class="new">' + B('NEW', 'نیا') + '</span>' : '') +
             '<span class="dt">' + B(fmtDate(f.date, false), fmtDate(f.date, true)) + (f.size ? ' · ' + esc(f.size) : '') + '</span>' +
-            '<a class="nfile" style="margin:6px 0 0" href="' + esc(f.file) + '" target="_blank" rel="noopener">' + B('Download PDF', 'پی ڈی ایف ڈاؤن لوڈ') + '</a></span></li>');
+            '<a class="nfile" style="margin:6px 0 0" href="' + esc(f.file) + '" target="_blank" rel="noopener">' + (f.view ? B('View / download', 'دیکھیں / ڈاؤن لوڈ') : B('Download PDF', 'پی ڈی ایف ڈاؤن لوڈ')) + '</a></span></li>');
         });
         full.innerHTML = li.length ? '<ul class="nl">' + li.join('') + '</ul>' :
           '<p class="nempty">' + B('No notice at the moment. Please check again later or follow the WhatsApp Channel.',

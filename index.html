@@ -239,6 +239,9 @@ html[lang="ur"] .tag { font-family: var(--f-urdu); letter-spacing: 0; }
 
 /* FAQ */
 .faqs input { width: 100%; font: inherit; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--fg); margin-bottom: 10px; }
+.fqa { background: var(--chip); border: 1px solid var(--line); border-radius: 12px; padding: 4px 16px; margin-bottom: 10px; }
+.fqa p { margin: 10px 0; font-weight: 600; }
+.fqa a { font-weight: 700; margin-inline-start: 4px; }
 details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 0 16px; }
 details + details { margin-top: 8px; }
 summary { cursor: pointer; padding: 13px 0; font-weight: 700; }
@@ -567,8 +570,9 @@ html[dir="rtl"] .pglink a { unicode-bidi: plaintext; }
     <div class="faqs">
       <label for="fq" class="en" style="position:absolute;left:-9999px">Search questions</label>
       <input id="fq" type="search" autocomplete="off">
+      <div id="fqa" class="fqa" hidden aria-live="polite"></div>
       <div id="faqlist"></div>
-      <p id="nofaq" hidden><span class="en">No question matches. Please contact the college office.</span><span class="ur" data-nosnippet>کوئی سوال نہیں ملا۔ کالج آفس سے رابطہ کریں۔</span></p>
+      <p id="nofaq" hidden><span class="en">No question matches. Please contact the college office: <a href="#contact">Contact</a>.</span><span class="ur" data-nosnippet>کوئی سوال نہیں ملا۔ کالج آفس سے رابطہ کریں: <a href="#contact">رابطہ</a>۔</span></p>
     </div>
   </section>
 
@@ -819,20 +823,66 @@ html[dir="rtl"] .pglink a { unicode-bidi: plaintext; }
     ['Someone is asking for money for admission.', 'Admission is completely free. Do not pay anyone, and complain at govtnationalno1college@gmail.com.',
      'کوئی داخلے کے پیسے مانگ رہا ہے۔', 'داخلہ بالکل مفت ہے۔ کسی کو پیسے نہ دیں اور govtnationalno1college@gmail.com پر شکایت کریں۔']
   ];
+  /* v2.6 WEB18: question search. Words in EN / Urdu / Roman Urdu, with same-meaning words; live dates and cut-off on top. No AI, nothing leaves the phone. */
+  var SYN = [
+    ['date', 'dates', 'last', 'deadline', 'open', 'close', 'kab', 'tareekh', 'tarikh', 'akhri', 'aakhri', 'تاریخ', 'آخری', 'کب'],
+    ['document', 'documents', 'docs', 'kaghaz', 'kaghzat', 'dastavez', 'marksheet', 'certificate', 'دستاویز', 'دستاویزات', 'کاغذات', 'مارک'],
+    ['photo', 'picture', 'pic', 'tasveer', 'tasweer', 'تصویر'],
+    ['fee', 'fees', 'paisa', 'paise', 'paisay', 'money', 'free', 'muft', 'challan', 'فیس', 'پیسے', 'مفت'],
+    ['cutoff', 'cut', 'merit', 'percentage', 'marks', 'numbers', 'نمبر', 'میرٹ', 'فیصد'],
+    ['slip', 'receipt', 'raseed', 'download', 'print', 'سلپ', 'رسید'],
+    ['roll', 'rollno', 'رول'],
+    ['form', 'apply', 'admission', 'dakhla', 'daakhla', 'online', 'فارم', 'داخلہ'],
+    ['contact', 'phone', 'call', 'rabta', 'office', 'timing', 'timings', 'time', 'waqt', 'address', 'رابطہ', 'دفتر', 'وقت', 'اوقات', 'پتہ'],
+    ['faculty', 'group', 'science', 'commerce', 'arts', 'humanities', 'computer', 'engineering', 'medical', 'فیکلٹی', 'گروپ'],
+    ['attendance', 'hazri', 'haazri', 'absent', 'حاضری'],
+    ['card', 'idcard', 'کارڈ'],
+    ['enrollment', 'enrolment', 'board', 'انرولمنٹ', 'بورڈ'],
+    ['status', 'check', 'verify', 'اسٹیٹس', 'تصدیق'],
+    ['correction', 'mistake', 'wrong', 'ghalat', 'galat', 'edit', 'change', 'badal', 'غلط', 'درستی', 'تبدیلی'],
+    ['mobile', 'number', 'sim', 'whatsapp', 'موبائل', 'واٹس']
+  ];
+  var STOP = { ka: 1, ki: 1, ke: 1, ko: 1, hai: 1, hain: 1, kya: 1, the: 1, is: 1, a: 1, an: 1, to: 1, of: 1, 'in': 1, on: 1, my: 1, i: 1, me: 1, mein: 1, se: 1, par: 1, how: 1, what: 1, 'do': 1, can: 1, aur: 1, and: 1, mera: 1, meri: 1, hoga: 1, hogi: 1, karna: 1, karein: 1, kaise: 1, 'کیا': 1, 'ہے': 1, 'کا': 1, 'کی': 1, 'کے': 1, 'میں': 1, 'کو': 1, 'سے': 1, 'پر': 1, 'اور': 1, 'ہیں': 1, 'کیسے': 1 };
+  function words(q) { return String(q || '').toLowerCase().replace(/cut[\s-]*off/g, 'cutoff').split(/[^a-z0-9؀-ۿ]+/).filter(function (w) { return w.length > 1 && !STOP[w]; }); }
+  function grow(w) { var out = [w]; SYN.forEach(function (g) { if (g.indexOf(w) >= 0) g.forEach(function (x) { if (out.indexOf(x) < 0) out.push(x); }); }); return out; }
+  function hasW(hay, w) { return /[؀-ۿ]/.test(w) || w.length > 4 ? hay.indexOf(w) >= 0 : new RegExp('(^|[^a-z0-9])' + w + '(s|es)?([^a-z0-9]|$)').test(hay); }
+  function inGroup(ws, key) { var g = SYN.filter(function (x) { return x[0] === key; })[0] || []; return ws.some(function (w) { return g.indexOf(w) >= 0; }); }
+  function quick(ws) {
+    var out = [];
+    if (inGroup(ws, 'date')) out.push([T('Online form: opens ' + longD(OPEN) + ', last date ' + longD(CLOSE) + '.', 'آن لائن فارم: آغاز ' + longD(OPEN) + '، آخری تاریخ ' + longD(CLOSE) + '۔'), '#top']);
+    if (inGroup(ws, 'cutoff')) out.push([T('Last cut-off (Matric marks): ', 'آخری کٹ آف (میٹرک نمبر): ') + CUT.map(function (c) { return T(c[0][0], c[0][1]) + ' ' + c[1]; }).join(T(', ', '، ')), '#cutoff']);
+    if (inGroup(ws, 'document')) out.push([T('See the list of documents to upload.', 'اپ لوڈ کی جانے والی دستاویزات کی فہرست دیکھیں۔'), '#documents']);
+    if (inGroup(ws, 'fee')) out.push([T('Admission is completely free. Do not pay anyone.', 'داخلہ بالکل مفت ہے۔ کسی کو پیسے نہ دیں۔'), '']);
+    if (inGroup(ws, 'contact')) out.push([T('Office timings, address and contact are here.', 'دفتر کے اوقات، پتہ اور رابطہ یہاں ہے۔'), '#contact']);
+    return out;
+  }
   function drawFaq() {
-    var box = document.getElementById('faqlist'), q = document.getElementById('fq'), shown = 0, s = q.value.trim().toLowerCase();
-    q.placeholder = T('Search, e.g. photo, slip, roll', 'تلاش کریں، مثلاً تصویر، سلپ، رول');
+    var box = document.getElementById('faqlist'), q = document.getElementById('fq'), shown = 0, raw = q.value.trim().toLowerCase(), ws = words(raw), qa = document.getElementById('fqa');
+    q.placeholder = T('Ask or search: last date, documents, photo, slip', 'پوچھیں یا تلاش کریں: آخری تاریخ، دستاویزات، تصویر، سلپ');
     box.innerHTML = '';
-    FAQ.forEach(function (f) {
-      var qq = T(f[0], f[2]), aa = T(f[1], f[3]);
-      if (s && (qq + ' ' + aa).toLowerCase().indexOf(s) < 0) return;
-      var d = document.createElement('details'), sm = document.createElement('summary'), p = document.createElement('p');
-      sm.textContent = qq; p.textContent = aa; d.appendChild(sm); d.appendChild(p);
-      if (s) d.open = true;
+    var sets = ws.map(grow), list = FAQ.map(function (f, i) {
+      if (!raw) return [1, i, f];
+      var hq = (f[0] + ' ' + f[2]).toLowerCase(), ha = (f[1] + ' ' + f[3]).toLowerCase(), sc = 0;
+      if ((hq + ' ' + ha).indexOf(raw) >= 0) sc += 3;
+      sets.forEach(function (g) { if (g.some(function (w) { return hasW(hq, w); })) sc += 2; else if (g.some(function (w) { return hasW(ha, w); })) sc += 1; });
+      return [sc, i, f];
+    }).filter(function (x) { return x[0] > 0; });
+    if (raw) list.sort(function (a, b) { return b[0] - a[0] || a[1] - b[1]; });
+    list.slice(0, raw ? 8 : 999).forEach(function (x) {
+      var f = x[2], d = document.createElement('details'), sm = document.createElement('summary'), p = document.createElement('p');
+      sm.textContent = T(f[0], f[2]); p.textContent = T(f[1], f[3]); d.appendChild(sm); d.appendChild(p);
+      if (raw && shown < 2) d.open = true;
       box.appendChild(d); shown++;
     });
+    if (qa) {
+      var qk = raw ? quick(ws) : [];
+      qa.hidden = !qk.length; qa.innerHTML = '';
+      qk.forEach(function (k) { var p = document.createElement('p'); p.textContent = k[0] + ' '; if (k[1]) { var a = document.createElement('a'); a.href = k[1]; a.textContent = T('Open', 'کھولیں'); p.appendChild(a); } qa.appendChild(p); });
+      shown += qk.length;
+    }
     document.getElementById('nofaq').hidden = shown > 0;
   }
+  try { var q0 = new URLSearchParams(location.search).get('q'); if (q0) { document.getElementById('fq').value = q0.slice(0, 80); setTimeout(function () { var s0 = document.getElementById('faq'); if (s0 && s0.scrollIntoView) s0.scrollIntoView(); }, 400); } } catch (e) {}
   document.getElementById('fq').addEventListener('input', drawFaq);
 
   /* ---------- copy phone ---------- */

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b3d24">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>GNCK Staff</title>
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="manifest" href="/staff-app/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="GNCK Staff">
+<script>try{if(localStorage.getItem('gnckLang')==='ur'){document.documentElement.lang='ur';document.documentElement.dir='rtl';}}catch(e){}</script>
+<style>
+:root{--g:#0b3d24;--g2:#145c39;--gold:#c9a227;--bg:#eef2ef;--card:#fff;--fg:#13261b;--muted:#5d6e64;--line:#d5ddd7;--bad:#c62828}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--fg);font-family:'Segoe UI',Roboto,Arial,sans-serif;font-size:16px;min-height:100vh;padding-bottom:env(safe-area-inset-bottom,0)}
+html[lang="ur"] body{font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq','Segoe UI',Arial,sans-serif;line-height:2}
+html[lang="en"] .ur,html[lang="ur"] .en{display:none}
+.top{background:linear-gradient(110deg,var(--g),var(--g2));color:#fff;border-bottom:4px solid var(--gold);padding:12px 14px;display:flex;align-items:center;gap:10px}
+.top img{width:38px;height:38px;border-radius:50%;background:#fff;padding:2px}.top b{font-size:1.05rem;line-height:1.25;flex:1}.top small{display:block;color:#f3dc8f;font-weight:600;font-size:.8rem}
+.tb{background:#fff;color:var(--g);border:0;border-radius:16px;padding:7px 13px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit}
+.wrap{max-width:560px;margin:0 auto;padding:14px}
+.go{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px;text-decoration:none;color:var(--fg);box-shadow:0 2px 8px rgba(0,0,0,.05);min-height:76px}
+.go:active{transform:scale(.99)}.go .ic{font-size:1.9rem;flex:none;width:44px;text-align:center}.go b{display:block;color:var(--g);font-size:1.08rem}.go span.d{color:var(--muted);font-size:.88rem}
+.note{background:#fff6dc;color:#6b4e00;border:1px solid rgba(201,162,39,.5);border-radius:12px;padding:12px 14px;margin-bottom:12px;font-size:.92rem}
+.off{background:#fde8e8;color:var(--bad);border-color:#f3b4b4;font-weight:700}
+.btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:12px;padding:14px;font-weight:700;font-size:1rem;cursor:pointer;font-family:inherit;margin-bottom:12px}
+.muted{color:var(--muted);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+<div class="top"><img src="/icon-192.png" alt="" width="38" height="38"><b>GNCK Staff<small><span class="en">Govt. National College (Morning), Karachi</span><span class="ur">گورنمنٹ نیشنل کالج (مارننگ)، کراچی</span></small></b><button class="tb" id="lg" type="button">اردو</button></div>
+<div class="wrap">
+  <div class="note off" id="offl" hidden><span class="en">No internet. The staff page and admin pages need internet. The attendance scanner keeps attendance on the phone and sends it later.</span><span class="ur">انٹرنیٹ نہیں ہے۔ اسٹاف اور ایڈمن پیج کے لیے انٹرنیٹ ضروری ہے۔ حاضری اسکینر حاضری فون میں رکھتا ہے اور بعد میں بھیج دیتا ہے۔</span></div>
+  <button class="btn" id="inst" type="button" hidden>&#11015; <span class="en">Install this app on the phone</span><span class="ur">یہ ایپ فون میں انسٹال کریں</span></button>
+  <a class="go" id="aStaff" rel="noopener"><span class="ic" aria-hidden="true">&#128203;</span><span><b><span class="en">Admission staff page</span><span class="ur">داخلہ اسٹاف پیج</span></b><span class="d"><span class="en">Check forms, STAFF OK, send a document back</span><span class="ur">فارم چیک، اسٹاف اوکے، دستاویز واپس</span></span></span></a>
+  <a class="go" href="/attendance/scan/"><span class="ic" aria-hidden="true">&#128247;</span><span><b><span class="en">Attendance scanner (teachers)</span><span class="ur">حاضری اسکینر (اساتذہ)</span></b><span class="d"><span class="en">Scan ID cards, works without internet</span><span class="ur">کارڈ اسکین، انٹرنیٹ کے بغیر بھی</span></span></span></a>
+  <a class="go" id="aTeach" rel="noopener"><span class="ic" aria-hidden="true">&#127979;</span><span><b><span class="en">Teacher dashboard</span><span class="ur">استاد کا ڈیش بورڈ</span></b><span class="d"><span class="en">Today's attendance, weak students, notes / homework</span><span class="ur">آج کی حاضری، کمزور طلبہ، نوٹس / کام</span></span></span></a>
+  <a class="go" id="aAdmin" rel="noopener"><span class="ic" aria-hidden="true">&#128273;</span><span><b><span class="en">Admin Home</span><span class="ur">ایڈمن ہوم</span></b><span class="d"><span class="en">Admin and deputy only</span><span class="ur">صرف ایڈمن اور ڈپٹی</span></span></span></a>
+  <div class="note" id="ios" hidden><span class="en">iPhone: tap the Share button, then "Add to Home Screen".</span><span class="ur">آئی فون: شیئر کا بٹن دبائیں، پھر "Add to Home Screen"۔</span></div>
+  <p class="muted"><span class="en">For college staff only. Use your own username and password. Never share them.</span><span class="ur">صرف کالج اسٹاف کے لیے۔ اپنا یوزر نیم اور پاس ورڈ استعمال کریں، کسی کو نہ دیں۔</span></p>
+  <p class="muted"><a href="/" style="color:inherit"><span class="en">College website</span><span class="ur">کالج کی ویب سائٹ</span></a></p>
+</div>
+<script>
+(function(){
+  var EXEC='https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec';
+  function $(i){return document.getElementById(i);}
+  $('aStaff').href=EXEC+'?action=staff';$('aTeach').href=EXEC+'?action=teacher';$('aAdmin').href=EXEC+'?action=adminhome';
+  var H=document.documentElement,lg=$('lg');
+  function lab(){lg.textContent=H.lang==='ur'?'English':'اردو';}
+  lg.onclick=function(){var ur=H.lang!=='ur';H.lang=ur?'ur':'en';H.dir=ur?'rtl':'ltr';try{localStorage.setItem('gnckLang',ur?'ur':'en');}catch(e){}lab();};lab();
+  function net(){$('offl').hidden=navigator.onLine!==false;}
+  window.addEventListener('online',net);window.addEventListener('offline',net);net();
+  var ev=null,ib=$('inst');
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();ev=e;ib.hidden=false;});
+  ib.onclick=function(){if(!ev)return;ev.prompt();ev.userChoice.then(function(){ev=null;ib.hidden=true;});};
+  window.addEventListener('appinstalled',function(){ib.hidden=true;});
+  var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+  if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!standalone)$('ios').hidden=false;
+  if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(function(){});
+})();
+</script>
+</body>
+</html>
