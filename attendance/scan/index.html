@@ -129,7 +129,6 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
   var EXEC = 'https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec';
   var JSQR = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js';
   var QKEY = 'gnckAttQ1', TKEY = 'gnckScanTok', IDLE_MIN = 30;   // v2.5 WEB15: login token (Google v22: Control Panel decides how long)
-  var HIDE = false, LASTC = null; // v2.8 P152: the server sends only counts
   var U = '', P = '', INFO = null, FAC = '', ROWS = [], stream = null, track = null, det = null, scanning = false, busy = false, lastText = '', lastAt = 0, geo = null, geoWatch = null, idleT = null;
   var root = document.documentElement;
   function $(id) { return document.getElementById(id); }
@@ -229,11 +228,11 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
   });
   $('chg').onclick = function () { stopCam(); FAC = ''; show('s2'); $('listcard').classList.add('hide'); };
   function loadList() {
-    return api('list', { fac: FAC }).then(function (r) { ROWS = r.rows || []; HIDE = !!r.hide; LASTC = r.cnt || null; counts(r); drawList(); }).catch(function (e) { if (e.auth) logout(errTxt(e.message)); });
+    return api('list', { fac: FAC }).then(function (r) { ROWS = r.rows || []; counts(r); drawList(); }).catch(function (e) { if (e.auth) logout(errTxt(e.message)); });
   }
   function counts(r) {
     var c = { P: 0, L: 0, A: 0, LV: 0, N: 0 };
-    if (r && r.cnt) c = r.cnt; else if (HIDE && LASTC) c = LASTC; else ROWS.forEach(function (x) { c[x.st || 'N'] = (c[x.st || 'N'] || 0) + 1; });
+    if (r && r.cnt) c = r.cnt; else ROWS.forEach(function (x) { c[x.st || 'N'] = (c[x.st || 'N'] || 0) + 1; });
     var L = [['P', 'Present', 'حاضر'], ['L', 'Late', 'لیٹ'], ['A', 'Absent', 'غیر حاضر'], ['LV', 'Leave', 'چھٹی'], ['N', 'Left', 'باقی']];
     $('cnt').innerHTML = L.map(function (x) { return '<div><b>' + (c[x[0]] || 0) + '</b><span>' + bil(x[1], x[2]) + '</span></div>'; }).join('');
   }
@@ -242,7 +241,6 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
     counts(null); if (!$('listcard').classList.contains('hide')) drawList();
   }
   function drawList() {
-    if (HIDE) { $('list').innerHTML = '<p class="muted">&#128274; ' + bil('For privacy the student list is not shown here. Scan the ID card (or type the College Roll). Only the office sees the list.', 'رازداری کے لیے یہاں طلبہ کی فہرست نہیں دکھائی جاتی۔ آئی ڈی کارڈ اسکین کریں (یا کالج رول لکھیں)۔ فہرست صرف آفس دیکھتا ہے۔') + '</p>'; return; }
     $('list').innerHTML = ROWS.map(function (x) {
       return '<div class="lr"><span class="chip ' + esc(x.st) + '">' + esc(x.st || '-') + '</span><div class="n"><b>' + esc(x.name) + '</b><small>' + esc(x.roll) + (x.t ? ' · ' + esc(x.t) : '') + (x.lv ? ' · LEAVE' : '') + '</small></div>' +
         ['P', 'L', 'A'].map(function (s) { return '<button class="mk" type="button" data-r="' + esc(x.roll) + '" data-s="' + s + '">' + s + '</button>'; }).join('') + '</div>';
@@ -254,7 +252,7 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
   $('mgo').onclick = function () { var r = $('mroll').value.replace(/\D/g, ''); if (!r) return; $('mroll').value = ''; mark({ roll: r }); };
   $('mroll').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('mgo').click(); });
   $('fin').onclick = function () {
-    var left = HIDE && LASTC ? (LASTC.N || 0) : ROWS.filter(function (x) { return !x.st; }).length;
+    var left = ROWS.filter(function (x) { return !x.st; }).length;
     if (!confirm(T('Class finished? ' + left + ' student(s) not marked will be ABSENT (approved leave = LEAVE).', 'کلاس ختم؟ ' + left + ' طلبہ جن کی حاضری نہیں لگی غیر حاضر ہوں گے (منظور چھٹی = چھٹی)۔'))) return;
     $('fin').disabled = true;
     api('finish', { fac: FAC, d: geo || {} }).then(function (r) {
@@ -289,7 +287,6 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
       ({ P: T('PRESENT', 'حاضر'), L: T('LATE', 'لیٹ'), A: T('ABSENT', 'غیر حاضر'), LV: T('LEAVE', 'چھٹی') }[r.status] || r.status);
     beep(r.already ? 'al' : (late ? 'late' : (r.status === 'A' ? 'bad' : 'ok')));
     result(r.already ? 'al' : (late ? 'late' : (r.status === 'A' ? 'bad' : 'ok')), st, r.name || '', 'College Roll ' + r.roll + ' · ' + (r.time || '') + (r.already && r.by ? ' · ' + r.by : '') + (r.locOk === false && INFO && INFO.locMode === 'CHECK' ? ' · ' + T('location far', 'لوکیشن دور') : ''), r.photo || '');
-    if (!r.already && HIDE && LASTC && r.status) { LASTC[r.status] = (LASTC[r.status] || 0) + 1; if (LASTC.N > 0) LASTC.N--; }
     if (!r.already) setRow(r.roll, r.status, r.time);
   }
 
