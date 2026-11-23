@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap">
 <script>try{if(localStorage.getItem('gnckLang')==='ur'){document.documentElement.lang='ur';document.documentElement.dir='rtl';}}catch(e){}</script>
 <style>
+.kiosk .tools,.kiosk #chg,.kiosk #fin,.kiosk #listcard,.kiosk header.bar .tb,.kiosk #manbox,.kiosk #qbar,.kiosk #langbtn,.kiosk #lo{display:none!important}.kiosk .res{min-height:46vh;font-size:1.4em}.kiosk .res .st{font-size:2.2em}.kiosk .res img{width:140px;height:170px}
+#kx28{position:fixed;right:10px;bottom:10px;opacity:.75;z-index:99;display:none}.b28o{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;overflow:auto;padding:14px}.b28o .card{max-width:560px;margin:10px auto}.b28o label{display:block;padding:9px 4px;border-bottom:1px solid #e3e3e3}
 :root{--g:#0b3d24;--g2:#145c39;--gold:#c9a227;--bg:#eef2ef;--card:#fff;--fg:#13261b;--muted:#5d6e64;--line:#d5ddd7;--ok:#1f8a4c;--late:#c77700;--bad:#c62828}
 *{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--fg);font-family:'Source Sans 3',Arial,sans-serif;font-size:16px;min-height:100vh}
 html[lang="ur"] body{font-family:'Noto Nastaliq Urdu','Source Sans 3',Arial,sans-serif}
@@ -76,6 +78,7 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
   <input class="f" id="p" type="password" autocomplete="current-password">
   <button class="btn w" id="lb" type="button"><span class="en">Login</span><span class="ur">لاگ ان</span></button>
   <div class="msg" id="m1"></div>
+  <p class="muted" style="text-align:center;margin-top:10px"><a href="/apps/"><span class="en">Android app for teachers (GNCK Attendance)</span><span class="ur" data-nosnippet>اساتذہ کے لیے اینڈرائیڈ ایپ (جی این سی کے اٹینڈنس)</span></a></p>
 </div>
 
 <!-- 2. class -->
@@ -109,6 +112,8 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
       <button class="btn o s hide" id="torch" type="button">&#128294; <span class="en">Light</span><span class="ur">لائٹ</span></button>
       <button class="btn o s" id="man" type="button">&#9000; <span class="en">By roll no.</span><span class="ur">رول نمبر سے</span></button>
       <button class="btn o s" id="lst" type="button">&#9776; <span class="en">Class list</span><span class="ur">کلاس لسٹ</span></button>
+      <button class="btn o s hide" id="bulk28" type="button">&#9745; <span class="en">All PRESENT, tick ABSENT</span><span class="ur">سب حاضر، غیر حاضر چنیں</span></button>
+      <button class="btn o s hide" id="kio28" type="button">&#128421; <span class="en">Kiosk mode</span><span class="ur">کیوسک موڈ</span></button>
     </div>
     <div class="row hide" id="manbox">
       <input class="f" id="mroll" inputmode="numeric" placeholder="College Roll" style="flex:1">
@@ -116,6 +121,7 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
     </div>
     <div class="row"><button class="btn r w" id="fin" type="button" style="margin-top:4px"><span class="en">Class finished: rest ABSENT</span><span class="ur">کلاس ختم: باقی غیر حاضر</span></button></div>
   </div>
+  <button class="btn r s" id="kx28" type="button"><span class="en">Exit kiosk</span><span class="ur">کیوسک بند</span></button>
   <div class="card hide" id="listcard"><div class="list" id="list"></div></div>
 </div>
 
@@ -129,6 +135,7 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
   var EXEC = 'https://script.google.com/macros/s/AKfycby5KEXSxmiqXUC0hCk6jRTdc_-XagevQAWsCiEWTKjU1HLqtYm1RLPSQWn6513rPHhTHA/exec';
   var JSQR = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js';
   var QKEY = 'gnckAttQ1', TKEY = 'gnckScanTok', IDLE_MIN = 30;   // v2.5 WEB15: login token (Google v22: Control Panel decides how long)
+  var K28 = {}, INF28 = 0, KIOSK = false, WL28 = null, KB28 = '', KBT28 = 0;
   var U = '', P = '', INFO = null, FAC = '', ROWS = [], stream = null, track = null, det = null, scanning = false, busy = false, lastText = '', lastAt = 0, geo = null, geoWatch = null, idleT = null;
   var root = document.documentElement;
   function $(id) { return document.getElementById(id); }
@@ -184,7 +191,7 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
   function enter(r) {
       if (r.tok) { P = 'T:' + r.tok; tkPut({ u: U, t: r.tok }); }
       if (r.cfg && r.cfg.idle != null) IDLE_MIN = parseInt(r.cfg.idle, 10) || 0;
-      INFO = r; $('p').value = ''; $('m1').innerHTML = ''; $('lb').disabled = false;
+      INFO = r; K28 = r.k28 || {}; $('bulk28').classList.toggle('hide', !K28.bulk); $('kio28').classList.toggle('hide', !(K28.kiosk || K28.machine)); $('p').value = ''; $('m1').innerHTML = ''; $('lb').disabled = false;
       $('info').innerHTML = bil(r.user + ' · ' + r.today + ' · LATE after ' + r.late, r.user + ' · ' + r.today + ' · ' + r.late + ' کے بعد لیٹ') +
         (r.holiday ? '<br><b style="color:#c62828">' + bil('Holiday: ' + r.holiday, 'چھٹی: ' + r.holiday) + '</b>' : (!r.workday ? '<br><b style="color:#c62828">' + bil('Today is a weekend / off day.', 'آج ہفتہ وار چھٹی ہے۔') + '</b>' : ''));
       $('facs').innerHTML = r.faculties.map(function (f) { return '<button class="btn" type="button" data-f="' + esc(f) + '"><span>' + esc(f) + '</span><span>&#8250;</span></button>'; }).join('');
@@ -275,8 +282,10 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
     far: ['NOT AT COLLEGE', 'Location: you are not at the college. Distance (m): ', 'کالج سے باہر', 'لوکیشن: آپ کالج میں نہیں ہیں۔ فاصلہ (میٹر): '],
     noloc: ['LOCATION NEEDED', 'Allow location for attendance.', 'لوکیشن ضروری', 'حاضری کے لیے لوکیشن کی اجازت دیں۔'],
     oldcard: ['OLD CARD', 'Old card: a new card was issued. Do not mark.', 'پرانا کارڈ', 'پرانا کارڈ: نیا کارڈ جاری ہو چکا۔ حاضری نہ لگائیں۔'],
+    kioskoff: ['KIOSK OFF', 'Kiosk mode is OFF (Control Panel).', 'کیوسک بند', 'کیوسک موڈ بند ہے (کنٹرول پینل)۔'],
     suspended: ['SUSPENDED', 'Card suspended: do not mark. Send the student to the office.', 'معطل', 'کارڈ معطل: حاضری نہ لگائیں۔ طالب علم کو آفس بھیجیں۔'] };
   function shown(r) {
+    if (r.ok && r.out) { beep('ok'); result('ok', T('OUT ', 'گیا ') + r.out, r.name || '', 'College Roll ' + r.roll, r.photo || ''); return; }
     if (!r.ok) {
       var m = MSG[r.code] || ['ERROR', r.msg || r.code || '', 'غلطی', r.msg || r.code || ''];
       var extra = r.code === 'otherClass' ? (r.faculty || '') : (r.code === 'far' ? String(r.dist || '') : '');
@@ -294,10 +303,10 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
   function mark(d) {
     if (!FAC) return;
     d.faculty = FAC; if (geo) { d.lat = geo.lat; d.lng = geo.lng; d.acc = geo.acc; }
-    busy = true;
+    INF28++; if (KIOSK) d.kiosk = true;
     if (!d.text) result('al', T('SAVING...', 'محفوظ ہو رہا ہے...'), 'College Roll ' + d.roll, '', '');
-    return api('mark', { d: d }).then(function (r) { busy = false; shown(r); }).catch(function (e) {
-      busy = false;
+    return api('mark', { d: d }).then(function (r) { INF28--; shown(r); }).catch(function (e) {
+      INF28--;
       if (e.auth) { logout(errTxt(e.message)); return; }
       if (e.net) { d.at = Date.now(); queueAdd(d); beep('ok'); result('al', T('SAVED ON PHONE', 'فون میں محفوظ'), T('No internet: will be sent automatically.', 'انٹرنیٹ نہیں: خود بھیج دیا جائے گا۔'), d.roll ? 'College Roll ' + d.roll : '', ''); return; }
       beep('bad'); result('bad', T('ERROR', 'غلطی'), String(e.message || '').split('||')[ur() ? 1 : 0] || '', '', '');
@@ -394,6 +403,48 @@ input.f{width:100%;border:1px solid #c3cfc7;border-radius:10px;padding:12px;font
     result('al', T('CHECKING...', 'جانچ ہو رہی ہے...'), '', '', '');
     mark({ text: text });
   }
+  // ---------- v2.8: P145 all PRESENT, tick ABSENT ----------
+  $('bulk28').onclick = function () {
+    if (!FAC) return;
+    var o = document.createElement('div'); o.className = 'b28o';
+    o.innerHTML = '<div class="card"><b>' + bil('Tick only the ABSENT students. Everyone else = PRESENT (after the late time = LATE).', 'صرف غیر حاضر طلبہ پر نشان لگائیں۔ باقی سب حاضر۔') + '</b>' +
+      ROWS.map(function (x) { return '<label><input type="checkbox" class="b28" value="' + esc(x.roll) + '"' + (x.st === 'A' ? ' checked' : '') + '> ' + esc(x.roll) + ' · ' + esc(x.name) + (x.st ? ' <small>(' + esc(x.st) + ')</small>' : '') + '</label>'; }).join('') +
+      '<div class="row" style="margin-top:10px"><button class="btn" type="button" id="b28s">' + bil('SAVE', 'محفوظ کریں') + '</button><button class="btn o" type="button" id="b28c">' + bil('Cancel', 'منسوخ') + '</button></div></div>';
+    document.body.appendChild(o);
+    o.querySelector('#b28c').onclick = function () { o.remove(); };
+    o.querySelector('#b28s').onclick = function () {
+      var ab = [].slice.call(o.querySelectorAll('.b28:checked')).map(function (c) { return c.value; });
+      if (!confirm(T('ABSENT: ' + ab.length + '. Everyone else PRESENT. Save?', 'غیر حاضر: ' + ab.length + '۔ باقی سب حاضر۔ محفوظ کریں؟'))) return;
+      this.disabled = true;
+      api('bulk', { fac: FAC, absent: ab }).then(function (n) { o.remove(); beep('ok'); result('ok', T('SAVED', 'محفوظ'), T('Present ' + (n.P + n.L) + ' · Absent ' + n.A + ' · already marked ' + n.kept, 'حاضر ' + (n.P + n.L) + ' · غیر حاضر ' + n.A), '', ''); loadList(); })
+        .catch(function (e) { o.remove(); if (e.auth) logout(errTxt(e.message)); else result('bad', T('NOT SAVED', 'محفوظ نہیں ہوا'), String(e.message || '').split('||')[ur() ? 1 : 0] || '', '', ''); });
+    };
+  };
+  // ---------- v2.8: P147 kiosk (phone / tablet / gate machine on a stand) ----------
+  function kioskOn(on) {
+    KIOSK = on; document.body.classList.toggle('kiosk', on); $('kx28').style.display = on ? 'block' : 'none';
+    if (on) {
+      try { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function () {}); } catch (e) {}
+      try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(function (w) { WL28 = w; }).catch(function () {}); } catch (e) {}
+      result('al', T('KIOSK MODE', 'کیوسک موڈ'), T('Show your ID card to the camera' + (K28.machine ? ' or the scanner' : '') + '.', 'اپنا آئی ڈی کارڈ کیمرے' + (K28.machine ? ' یا اسکینر' : '') + ' کے سامنے کریں۔'), '', '');
+    } else {
+      try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) {}
+      try { if (WL28) WL28.release(); } catch (e) {} WL28 = null;
+    }
+  }
+  $('kio28').onclick = function () { if (!FAC) return; kioskOn(true); };
+  $('kx28').onclick = function () { var w = prompt(T('Type EXIT to close the kiosk mode:', 'کیوسک بند کرنے کے لیے EXIT لکھیں:')); if (w && w.trim().toUpperCase() === 'EXIT') kioskOn(false); };
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && KIOSK && navigator.wakeLock) navigator.wakeLock.request('screen').then(function (w) { WL28 = w; }).catch(function () {}); });
+  // ---------- v2.8: P153 QR scanner machine (types like a keyboard, then Enter) ----------
+  document.addEventListener('keydown', function (e) {
+    if (!K28.machine || !FAC || $('s3').classList.contains('hide')) return;
+    var t = e.target; if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') && t.id !== 'kb28') return;
+    var now = Date.now();
+    if (now - KBT28 > 300) KB28 = '';
+    KBT28 = now;
+    if (e.key === 'Enter') { if (KB28.length > 8) { var x = KB28; KB28 = ''; e.preventDefault(); got(x); } return; }
+    if (e.key && e.key.length === 1) KB28 += e.key;
+  }, true);
   queueBar();
 })();
 </script>
