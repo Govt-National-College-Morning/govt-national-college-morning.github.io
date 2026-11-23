@@ -94,7 +94,7 @@
   function footer(w, s) {
     drop('ft28');
     var f = w.footer || {}, links = (f.links || []).filter(function (l) { return l && safe(l.url); }), soc = (w.social || []).filter(function (x) { return x && SOCN[x.name] && safe(x.url); });
-    var cp = w.copy && w.copy.on === true, site = (s && s.links && s.links.site) || 'https://govt-national-college-morning.github.io';
+    var cp = w.copy && w.copy.on === true, site = (s && s.links && s.links.site) || 'https://gnck.edu.pk';
     var fac = w.faculty && w.faculty.on === true;
     if (!f.en && !f.ur && !links.length && !soc.length && !cp && !fac) return;
     var d = document.createElement('div'); d.id = 'ft28'; d.className = 'ft28';
