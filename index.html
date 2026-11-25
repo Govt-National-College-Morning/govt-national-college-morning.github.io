@@ -501,9 +501,15 @@ html[dir="rtl"] .pglink a { unicode-bidi: plaintext; }
 
   <section id="documents" class="v-st" aria-labelledby="h-docs">
     <div class="sh"><span class="eyebrow"><span class="en">Be ready</span><span class="ur" data-nosnippet>تیاری</span></span><h2 id="h-docs"><span class="en">Required documents</span><span class="ur" data-nosnippet>ضروری دستاویزات</span></h2><p><span class="en">Tick each document as you arrange it. Your ticks stay on this phone only.</span><span class="ur" data-nosnippet>ہر دستاویز تیار ہونے پر نشان لگائیں۔ یہ نشان صرف اسی فون پر محفوظ رہتے ہیں۔</span></p></div>
+    <div class="tabsbar" role="tablist" aria-label="FINAL admission">
+      <span class="grp"><span class="en">FINAL admission: bring to college</span><span class="ur" data-nosnippet>فائنل داخلہ: کالج ساتھ لائیں</span></span>
+      <button type="button" role="tab" data-d="ak" aria-selected="true"><span class="en">Karachi Board</span><span class="ur" data-nosnippet>کراچی بورڈ</span></button>
+      <button type="button" role="tab" data-d="ao" aria-selected="false"><span class="en">Other Board</span><span class="ur" data-nosnippet>دوسرا بورڈ</span></button>
+      <button type="button" role="tab" data-d="al" aria-selected="false"><span class="en">O-Level</span><span class="ur" data-nosnippet>او لیول</span></button>
+    </div>
     <div class="tabsbar" role="tablist" aria-label="SECCAP">
       <span class="grp"><span class="en">SECCAP</span><span class="ur" data-nosnippet>سیکیپ</span></span>
-      <button type="button" role="tab" data-d="sm" aria-selected="true"><span class="en">Matric</span><span class="ur" data-nosnippet>میٹرک</span></button>
+      <button type="button" role="tab" data-d="sm" aria-selected="false"><span class="en">Matric</span><span class="ur" data-nosnippet>میٹرک</span></button>
       <button type="button" role="tab" data-d="so" aria-selected="false"><span class="en">O-Level</span><span class="ur" data-nosnippet>او لیول</span></button>
     </div>
     <div class="tabsbar" role="tablist" aria-label="Online form">
@@ -682,6 +688,22 @@ html[dir="rtl"] .pglink a { unicode-bidi: plaintext; }
 
   /* ---------- documents ---------- */
   var DOCS = {
+    ak: { t: ['FINAL admission: Karachi Board (bring to college)', 'فائنل داخلہ: کراچی بورڈ (کالج ساتھ لائیں)'], items: [
+      ['Matric marksheet: ORIGINAL + photocopy', 'میٹرک کی مارکس شیٹ: اصل + فوٹو کاپی'],
+      ['9th marksheet: ORIGINAL + photocopy', 'نویں جماعت کی مارکس شیٹ: اصل + فوٹو کاپی'],
+      ['Provisional admission slip (SECCAP): ORIGINAL + photocopy', 'عارضی داخلہ سلپ (سیکیپ): اصل + فوٹو کاپی']] },
+    ao: { t: ['FINAL admission: Other Board (bring to college)', 'فائنل داخلہ: دوسرا بورڈ (کالج ساتھ لائیں)'], items: [
+      ['Matric marksheet: ORIGINAL + photocopy', 'میٹرک کی مارکس شیٹ: اصل + فوٹو کاپی'],
+      ['9th marksheet: ORIGINAL + photocopy', 'نویں جماعت کی مارکس شیٹ: اصل + فوٹو کاپی'],
+      ['Provisional admission slip (SECCAP): ORIGINAL + photocopy', 'عارضی داخلہ سلپ (سیکیپ): اصل + فوٹو کاپی'],
+      ['Migration certificate: photocopy', 'مائیگریشن سرٹیفکیٹ: فوٹو کاپی'],
+      ['Permission letter: photocopy', 'اجازت نامہ: فوٹو کاپی']] },
+    al: { t: ['FINAL admission: O-Level (bring to college)', 'فائنل داخلہ: او لیول (کالج ساتھ لائیں)'], items: [
+      ['O-Level result: ORIGINAL + photocopy', 'او لیول کا رزلٹ: اصل + فوٹو کاپی'],
+      ['IBCC Equivalence certificate: ORIGINAL + photocopy', 'آئی بی سی سی ایکوئیولنس سرٹیفکیٹ: اصل + فوٹو کاپی'],
+      ['Provisional admission slip (SECCAP): ORIGINAL + photocopy', 'عارضی داخلہ سلپ (سیکیپ): اصل + فوٹو کاپی'],
+      ['Migration certificate: photocopy', 'مائیگریشن سرٹیفکیٹ: فوٹو کاپی'],
+      ['Permission letter: photocopy', 'اجازت نامہ: فوٹو کاپی']] },
     sm: { t: ['SECCAP documents: Matric', 'سیکیپ دستاویزات: میٹرک'], items: [
       ['Admission form (with the granted provisional admission)', 'داخلہ فارم (عارضی داخلے کے ساتھ)'],
       ['9th marksheet (if Matric year 2026)', 'نویں جماعت کی مارکس شیٹ (اگر میٹرک 2026 ہے)'],
@@ -718,7 +740,7 @@ html[dir="rtl"] .pglink a { unicode-bidi: plaintext; }
       ['IBCC Equivalence certificate (write its number in the form)', 'آئی بی سی سی ایکوئیولنس سرٹیفکیٹ (اس کا نمبر فارم میں لکھیں)'],
       ['Passport photo (blue background)', 'پاسپورٹ تصویر (نیلا بیک گراؤنڈ)']] }
   };
-  var cur = 'sm', ticks = {};
+  var cur = 'ak', ticks = {};
   try { ticks = JSON.parse(localStorage.getItem('gnckDocs') || '{}') || {}; } catch (e) { ticks = {}; }
   function saveTicks() { try { localStorage.setItem('gnckDocs', JSON.stringify(ticks)); } catch (e) {} }
   function prog() {
